@@ -154,10 +154,28 @@ def cell_reference(dict, row, column):
     else:
         print "other column"
 
-    if key in range(0,2) and key in range(9,11) and key in range (18,20):
+    if key in range(0,3) or key in range(9,12) or key in range (18,21):
         cell_box = puzzle_boxes[0]
         print puzzle_boxes[0]
-
+    elif key in range(3,6) or key in range(12,15) or key in range (21,24):
+        cell_box = puzzle_boxes[1]
+        print puzzle_boxes[1]
+    elif key in range(6,9) or key in range(15,18) or key in range (24,27):
+        cell_box = puzzle_boxes[2]
+        print puzzle_boxes[2]
+    elif key in range(27,30) or key in range(36,39) or key in range (45,48):
+        cell_box = puzzle_boxes[3]
+        print puzzle_boxes[3]
+    elif key in range(30,33) or key in range(39,42) or key in range (48,51):
+        cell_box = puzzle_boxes[4]
+        print puzzle_boxes[4]
+    elif key in range(33,36) or key in range(42,45) or key in range (51,53):
+        cell_box = puzzle_boxes[5]
+        print puzzle_boxes[5]
+    elif key in range(54,57) or key in range(63,66) or key in range (72,75):
+        cell_box = puzzle_boxes[6]
+        print puzzle_boxes[6]
+    # finish this
 
 
 
