@@ -1,6 +1,7 @@
 #no classes for now. this is an experiment with just methods.
 
 def puzzle_dict(puzzle_str):
+    global puzzle_master
     puzzle_str_arr = list(puzzle_str)
     puzzle_master = dict(enumerate(puzzle_str_arr))
 
@@ -12,6 +13,7 @@ def puzzle_dict(puzzle_str):
 
 
 def row_ref(puzzle_str):
+    global puzzle_rows
     #try and get this to be integers here
     puzzle_str = [ int(x) for x in puzzle_str ]
     puzzle_rows = [puzzle_str[x:x+9] for x in range(0, len(puzzle_str),9)]
@@ -20,12 +22,14 @@ def row_ref(puzzle_str):
     print puzzle_rows
 
 def column_ref(puzzle_str):
+    global puzzle_columns
     puzzle_str = [ int(x) for x in puzzle_str ]
     puzzle_columns = map(list, zip(*([puzzle_str[x:x+9] for x in range(0, len(puzzle_str),9)])))
     print "here are the colums"
     print puzzle_columns
 
 def box_ref(puzzle_str):
+    global puzzle_boxes_final
     puzzle_str = [ int(x) for x in puzzle_str ]
     puzzle_box_rows = [puzzle_str[x:x+3] for x in range(0, len(puzzle_str),3)]
     puzzle_box_rows = [list(cell) for cell in puzzle_box_rows]
@@ -86,9 +90,92 @@ def box_ref(puzzle_str):
 
 #NEXT STEP: make reference table so that you know the row, column, and box for a given cell
 
-def cell_reference(dict, row, column, box)
-    for cell in dict:
-        if 0 =< cell && cell >= 8:
+def cell_reference(dict, row, column):
+  for key, value in puzzle_master.iteritems():
+    print "start rows"
+    if key in range(0,8):
+        cell_row = row[0]
+        print row[0]
+    elif key in range(9,18):
+        cell_row = row[1]
+        print row[1]
+    elif key in range(18,27):
+        cell_row = row[2]
+        print row[2]
+    elif key in range(27,36):
+        cell_row = row[3]
+        print row[3]
+    elif key in range(36,45):
+        cell_row = row[4]
+        print row[4]
+    elif key in range(45,54):
+        cell_row = row[5]
+        print row[5]
+    elif key in range(54,63):
+        cell_row = row[6]
+        print row[6]
+    elif key in range(63,72):
+        cell_row = row[7]
+        print row[7]
+    elif key in range(72,82):
+        cell_row = row[8]
+        print row[8]
+    else:
+        print "Error. Row must be out of range"
+
+    #columns
+    if key in range(0,80,9):
+        cell_column = puzzle_columns[0]
+        print column[0]
+    elif key in range(1,80,9):
+        cell_column = puzzle_columns[1]
+        print column[1]
+    elif key in range(2,80,9):
+        cell_column = puzzle_columns[2]
+        print column[2]
+    elif key in range(3,80,9):
+        cell_column = puzzle_columns[3]
+        print column[3]
+    elif key in range(4,80,9):
+        cell_column = puzzle_columns[4]
+        print column[4]
+    elif key in range(5,80,9):
+        cell_column = puzzle_columns[5]
+        print column[5]
+    elif key in range(6,80,9):
+        cell_column = puzzle_columns[6]
+        print column[6]
+    elif key in range(7,80,9):
+        cell_column = puzzle_columns[7]
+        print column[7]
+    elif key in range(8,81,9):
+        cell_column = puzzle_columns[8]
+        print column[8]
+    else:
+        print "other column"
+
+    if key in range(0,3) or key in range(9,12) or key in range (18,21):
+        cell_box = puzzle_boxes[0]
+        print puzzle_boxes[0]
+    elif key in range(3,6) or key in range(12,15) or key in range (21,24):
+        cell_box = puzzle_boxes[1]
+        print puzzle_boxes[1]
+    elif key in range(6,9) or key in range(15,18) or key in range (24,27):
+        cell_box = puzzle_boxes[2]
+        print puzzle_boxes[2]
+    elif key in range(27,30) or key in range(36,39) or key in range (45,48):
+        cell_box = puzzle_boxes[3]
+        print puzzle_boxes[3]
+    elif key in range(30,33) or key in range(39,42) or key in range (48,51):
+        cell_box = puzzle_boxes[4]
+        print puzzle_boxes[4]
+    elif key in range(33,36) or key in range(42,45) or key in range (51,53):
+        cell_box = puzzle_boxes[5]
+        print puzzle_boxes[5]
+    elif key in range(54,57) or key in range(63,66) or key in range (72,75):
+        cell_box = puzzle_boxes[6]
+        print puzzle_boxes[6]
+    # finish this
 
 
 
@@ -97,4 +184,4 @@ puzzle_dict(practice_puzzle)
 row_ref(practice_puzzle)
 column_ref(practice_puzzle)
 box_ref(practice_puzzle)
-cell_refernce(puzzle_dict, row_ref, column_ref, box_ref)
+cell_reference(puzzle_master, puzzle_rows, puzzle_columns)
