@@ -92,50 +92,71 @@ def box_ref(puzzle_str):
 
 def cell_reference(dict, row, column):
   for key, value in puzzle_master.iteritems():
-    if key <= 8:
+    print "start rows"
+    if key in range(0,8):
         cell_row = row[0]
         print row[0]
-    elif key in range(9,17):
+    elif key in range(9,18):
         cell_row = row[1]
-    elif key in range(18,26):
+        print row[1]
+    elif key in range(18,27):
         cell_row = row[2]
-    elif key in range(27,35):
+        print row[2]
+    elif key in range(27,36):
         cell_row = row[3]
-    elif key in range(36,44):
+        print row[3]
+    elif key in range(36,45):
         cell_row = row[4]
-    elif key in range(45,53):
+        print row[4]
+    elif key in range(45,54):
         cell_row = row[5]
-    elif key in range(54,62):
+        print row[5]
+    elif key in range(54,63):
         cell_row = row[6]
-    elif key in range(63,71):
+        print row[6]
+    elif key in range(63,72):
         cell_row = row[7]
-    elif key in range(63,71):
+        print row[7]
+    elif key in range(72,82):
         cell_row = row[8]
-    elif key in range(72,80):
-        cell_row = row[9]
+        print row[8]
     else:
         print "Error. Row must be out of range"
 
+    #columns
     if key in range(0,80,9):
-        cell_column = puzzle_rows[0]
+        cell_column = puzzle_columns[0]
+        print column[0]
     elif key in range(1,80,9):
-        cell_column = puzzle_rows[1]
+        cell_column = puzzle_columns[1]
+        print column[1]
     elif key in range(2,80,9):
-        cell_column = puzzle_rows[2]
+        cell_column = puzzle_columns[2]
+        print column[2]
     elif key in range(3,80,9):
-        cell_column = puzzle_rows[3]
+        cell_column = puzzle_columns[3]
+        print column[3]
     elif key in range(4,80,9):
-        cell_column = puzzle_rows[4]
+        cell_column = puzzle_columns[4]
+        print column[4]
     elif key in range(5,80,9):
-        cell_column = puzzle_rows[5]
+        cell_column = puzzle_columns[5]
+        print column[5]
     elif key in range(6,80,9):
-        cell_column = puzzle_rows[6]
+        cell_column = puzzle_columns[6]
+        print column[6]
     elif key in range(7,80,9):
-        cell_column = puzzle_rows[7]
+        cell_column = puzzle_columns[7]
+        print column[7]
     elif key in range(8,81,9):
-        cell_column = puzzle_rows[8]
+        cell_column = puzzle_columns[8]
+        print column[8]
     else:
         print "other column"
+
+    if key in range(0,2) and key in range(9,11) and key in range (18,20):
+        cell_box = puzzle_boxes[0]
+        print puzzle_boxes[0]
 
 
 
@@ -145,4 +166,4 @@ puzzle_dict(practice_puzzle)
 row_ref(practice_puzzle)
 column_ref(practice_puzzle)
 box_ref(practice_puzzle)
-cell_reference(puzzle_master, puzzle_rows, column_ref)
+cell_reference(puzzle_master, puzzle_rows, puzzle_columns)
