@@ -17,20 +17,36 @@ def column_ref(puzzle_str):
 def box_ref(puzzle_str):
     puzzle_box_rows = [puzzle_str[x:x+3] for x in range(0, len(puzzle_str),3)]
     puzzle_box_rows = [list(cell) for cell in puzzle_box_rows]
-    # print puzzle_box_rows
 
-    puzzle_boxes = []
-    i = 27
+    puzzle_boxes = map(list, zip(*([puzzle_box_rows[x:x+3] for x in range(0, len(puzzle_box_rows),3)])))
 
-    while i > 0:
-        for box_row in puzzle_box_rows:
-            puzzle_boxes.append(puzzle_box_rows[i-1])
-            puzzle_boxes.append(puzzle_box_rows[i-4])
-            puzzle_boxes.append(puzzle_box_rows[i-7])
-            i = i-1
+    # print puzzle_boxes
 
-    # puzzle_boxes.reverse()
-    print puzzle_boxes
+    temp_flat = []
+    for sublist in puzzle_boxes:
+      for val in sublist:
+        temp_flat.append(val)
+
+    print temp_flat
+
+    print "yo"
+
+    puzzle_boxes_final = []
+
+    puzzle_boxes_final.append(temp_flat[0:3])
+    puzzle_boxes_final.append(temp_flat[9:12])
+    puzzle_boxes_final.append(temp_flat[18:21])
+    puzzle_boxes_final.append(temp_flat[3:6])
+    puzzle_boxes_final.append(temp_flat[12:15])
+    puzzle_boxes_final.append(temp_flat[21:24])
+    puzzle_boxes_final.append(temp_flat[6:9])
+    puzzle_boxes_final.append(temp_flat[15:18])
+    puzzle_boxes_final.append(temp_flat[24:27])
+
+    print puzzle_boxes_final
+
+
+
 
 
 practice_puzzle = "1-58-2----9--764-52--4--819-19--73-6762-83-9-----61-5---76---3-43--2-5-16--3-89--"
