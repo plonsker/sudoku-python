@@ -3,12 +3,18 @@
 def puzzle_dict(puzzle_str):
     puzzle_str_arr = list(puzzle_str)
     puzzle_master = dict(enumerate(puzzle_str_arr))
+
+    puzzle_master = {k:int(v) if v.isdigit() else v for k,v in puzzle_master.items()}
+
+
     print "Here is the dictionary"
     print puzzle_master
+
 
 def row_ref(puzzle_str):
     puzzle_rows = [puzzle_str[x:x+9] for x in range(0, len(puzzle_str),9)]
     puzzle_rows = [list(cell) for cell in puzzle_rows]
+    puzzle_rows = [ int(x) for x in puzzle_rows ]
     print "Here are the rows"
     print puzzle_rows
 
@@ -76,9 +82,7 @@ def box_ref(puzzle_str):
     print puzzle_boxes_final
 
 
-
-
-practice_puzzle = "1-58-2----9--764-52--4--819-19--73-6762-83-9-----61-5---76---3-43--2-5-16--3-89--"
+practice_puzzle = 105802000090076405200400819019007306762083090000061050007600030430020501600308900
 puzzle_dict(practice_puzzle)
 row_ref(practice_puzzle)
 column_ref(practice_puzzle)
