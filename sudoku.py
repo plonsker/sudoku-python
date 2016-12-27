@@ -31,20 +31,58 @@ def box_ref(puzzle_str):
 
     print "yo"
 
+    puzzle_boxes_temp = []
+
+    puzzle_boxes_temp.append(temp_flat[0:3])
+    puzzle_boxes_temp.append(temp_flat[9:12])
+    puzzle_boxes_temp.append(temp_flat[18:21])
+    puzzle_boxes_temp.append(temp_flat[3:6])
+    puzzle_boxes_temp.append(temp_flat[12:15])
+    puzzle_boxes_temp.append(temp_flat[21:24])
+    puzzle_boxes_temp.append(temp_flat[6:9])
+    puzzle_boxes_temp.append(temp_flat[15:18])
+    puzzle_boxes_temp.append(temp_flat[24:27])
+
+    print puzzle_boxes_temp
+
+    temp_flat_2= []
+
+    flattened_list = []
+
+    #flatten the lis
+    for x in puzzle_boxes_temp:
+      for y in x:
+        flattened_list.append(y)
+
+    print "yo 2"
+
+    print flattened_list
+
+    print "yo 3"
+
     puzzle_boxes_final = []
 
-    puzzle_boxes_final.append(temp_flat[0:3])
-    puzzle_boxes_final.append(temp_flat[9:12])
-    puzzle_boxes_final.append(temp_flat[18:21])
-    puzzle_boxes_final.append(temp_flat[3:6])
-    puzzle_boxes_final.append(temp_flat[12:15])
-    puzzle_boxes_final.append(temp_flat[21:24])
-    puzzle_boxes_final.append(temp_flat[6:9])
-    puzzle_boxes_final.append(temp_flat[15:18])
-    puzzle_boxes_final.append(temp_flat[24:27])
+    box_0 = flattened_list[0] + flattened_list[1] + flattened_list[2]
+    box_1 = flattened_list[3] + flattened_list[4] + flattened_list[5]
+    box_2 = flattened_list[6] + flattened_list[7] + flattened_list[8]
+    box_3 = flattened_list[9] + flattened_list[10] + flattened_list[11]
+    box_4 = flattened_list[12] + flattened_list[13] + flattened_list[14]
+    box_5 = flattened_list[15] + flattened_list[16] + flattened_list[17]
+    box_6 = flattened_list[18] + flattened_list[19] + flattened_list[20]
+    box_7 = flattened_list[21] + flattened_list[22] + flattened_list[23]
+    box_8 = flattened_list[24] + flattened_list[25] + flattened_list[26]
+
+    puzzle_boxes_final.append(box_0)
+    puzzle_boxes_final.append(box_1)
+    puzzle_boxes_final.append(box_2)
+    puzzle_boxes_final.append(box_3)
+    puzzle_boxes_final.append(box_4)
+    puzzle_boxes_final.append(box_5)
+    puzzle_boxes_final.append(box_6)
+    puzzle_boxes_final.append(box_7)
+    puzzle_boxes_final.append(box_8)
 
     print puzzle_boxes_final
-
 
 
 
