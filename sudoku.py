@@ -3,15 +3,18 @@
 def puzzle_dict(puzzle_str):
     puzzle_str_arr = list(puzzle_str)
     puzzle_master = dict(enumerate(puzzle_str_arr))
+    print "Here is the dictionary"
     print puzzle_master
 
 def row_ref(puzzle_str):
     puzzle_rows = [puzzle_str[x:x+9] for x in range(0, len(puzzle_str),9)]
     puzzle_rows = [list(cell) for cell in puzzle_rows]
-    print(puzzle_rows)
+    print "Here are the rows"
+    print puzzle_rows
 
 def column_ref(puzzle_str):
     puzzle_columns = map(list, zip(*([puzzle_str[x:x+9] for x in range(0, len(puzzle_str),9)])))
+    print "here are the colums"
     print puzzle_columns
 
 def box_ref(puzzle_str):
@@ -27,10 +30,6 @@ def box_ref(puzzle_str):
       for val in sublist:
         temp_flat.append(val)
 
-    print temp_flat
-
-    print "yo"
-
     puzzle_boxes_temp = []
 
     puzzle_boxes_temp.append(temp_flat[0:3])
@@ -43,22 +42,13 @@ def box_ref(puzzle_str):
     puzzle_boxes_temp.append(temp_flat[15:18])
     puzzle_boxes_temp.append(temp_flat[24:27])
 
-    print puzzle_boxes_temp
-
     temp_flat_2= []
 
     flattened_list = []
 
-    #flatten the lis
     for x in puzzle_boxes_temp:
       for y in x:
         flattened_list.append(y)
-
-    print "yo 2"
-
-    print flattened_list
-
-    print "yo 3"
 
     puzzle_boxes_final = []
 
@@ -82,13 +72,14 @@ def box_ref(puzzle_str):
     puzzle_boxes_final.append(box_7)
     puzzle_boxes_final.append(box_8)
 
+    print "here are the boxes"
     print puzzle_boxes_final
 
 
 
 
 practice_puzzle = "1-58-2----9--764-52--4--819-19--73-6762-83-9-----61-5---76---3-43--2-5-16--3-89--"
-# puzzle_dict(practice_puzzle)
-# row_ref(practice_puzzle)
-# column_ref(practice_puzzle)
+puzzle_dict(practice_puzzle)
+row_ref(practice_puzzle)
+column_ref(practice_puzzle)
 box_ref(practice_puzzle)
