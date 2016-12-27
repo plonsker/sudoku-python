@@ -12,18 +12,21 @@ def puzzle_dict(puzzle_str):
 
 
 def row_ref(puzzle_str):
+    #try and get this to be integers here
+    puzzle_str = [ int(x) for x in puzzle_str ]
     puzzle_rows = [puzzle_str[x:x+9] for x in range(0, len(puzzle_str),9)]
     puzzle_rows = [list(cell) for cell in puzzle_rows]
-    puzzle_rows = [ int(x) for x in puzzle_rows ]
     print "Here are the rows"
     print puzzle_rows
 
 def column_ref(puzzle_str):
+    puzzle_str = [ int(x) for x in puzzle_str ]
     puzzle_columns = map(list, zip(*([puzzle_str[x:x+9] for x in range(0, len(puzzle_str),9)])))
     print "here are the colums"
     print puzzle_columns
 
 def box_ref(puzzle_str):
+    puzzle_str = [ int(x) for x in puzzle_str ]
     puzzle_box_rows = [puzzle_str[x:x+3] for x in range(0, len(puzzle_str),3)]
     puzzle_box_rows = [list(cell) for cell in puzzle_box_rows]
 
@@ -81,8 +84,10 @@ def box_ref(puzzle_str):
     print "here are the boxes"
     print puzzle_boxes_final
 
+    #NEXT STEP: make reference table so that you know the row, column, and box for a given cell
 
-practice_puzzle = 105802000090076405200400819019007306762083090000061050007600030430020501600308900
+
+practice_puzzle = "105802000090076405200400819019007306762083090000061050007600030430020501600308900"
 puzzle_dict(practice_puzzle)
 row_ref(practice_puzzle)
 column_ref(practice_puzzle)
