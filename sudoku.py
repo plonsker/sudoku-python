@@ -1,6 +1,7 @@
 #no classes for now. this is an experiment with just methods.
 
 def puzzle_dict(puzzle_str):
+    global puzzle_master
     puzzle_str_arr = list(puzzle_str)
     puzzle_master = dict(enumerate(puzzle_str_arr))
 
@@ -12,6 +13,7 @@ def puzzle_dict(puzzle_str):
 
 
 def row_ref(puzzle_str):
+    global puzzle_rows
     #try and get this to be integers here
     puzzle_str = [ int(x) for x in puzzle_str ]
     puzzle_rows = [puzzle_str[x:x+9] for x in range(0, len(puzzle_str),9)]
@@ -20,12 +22,14 @@ def row_ref(puzzle_str):
     print puzzle_rows
 
 def column_ref(puzzle_str):
+    global puzzle_columns
     puzzle_str = [ int(x) for x in puzzle_str ]
     puzzle_columns = map(list, zip(*([puzzle_str[x:x+9] for x in range(0, len(puzzle_str),9)])))
     print "here are the colums"
     print puzzle_columns
 
 def box_ref(puzzle_str):
+    global puzzle_boxes_final
     puzzle_str = [ int(x) for x in puzzle_str ]
     puzzle_box_rows = [puzzle_str[x:x+3] for x in range(0, len(puzzle_str),3)]
     puzzle_box_rows = [list(cell) for cell in puzzle_box_rows]
@@ -86,9 +90,19 @@ def box_ref(puzzle_str):
 
 #NEXT STEP: make reference table so that you know the row, column, and box for a given cell
 
-def cell_reference(dict, row, column, box)
-    for cell in dict:
-        if 0 =< cell && cell >= 8:
+def cell_reference(dict, row, column):
+  for key, value in puzzle_master.iteritems():
+    if key <= 8:
+        cell_row = row[0]
+        print row[0]
+    else:
+        print "other row"
+
+    if key == 0 or key == 9 or key == 17 or key == 25 or key == 33 or key == 41 or key == 49 or key == 57 or key == 65 or key == 73:
+            cell_column = 0
+    else:
+        print "other column"
+
 
 
 
@@ -97,4 +111,4 @@ puzzle_dict(practice_puzzle)
 row_ref(practice_puzzle)
 column_ref(practice_puzzle)
 box_ref(practice_puzzle)
-cell_refernce(puzzle_dict, row_ref, column_ref, box_ref)
+cell_reference(puzzle_master, puzzle_rows, column_ref)
