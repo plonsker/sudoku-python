@@ -95,11 +95,45 @@ def cell_reference(dict, row, column):
     if key <= 8:
         cell_row = row[0]
         print row[0]
+    elif key in range(9,17):
+        cell_row = row[1]
+    elif key in range(18,26):
+        cell_row = row[2]
+    elif key in range(27,35):
+        cell_row = row[3]
+    elif key in range(36,44):
+        cell_row = row[4]
+    elif key in range(45,53):
+        cell_row = row[5]
+    elif key in range(54,62):
+        cell_row = row[6]
+    elif key in range(63,71):
+        cell_row = row[7]
+    elif key in range(63,71):
+        cell_row = row[8]
+    elif key in range(72,80):
+        cell_row = row[9]
     else:
-        print "other row"
+        print "Error. Row must be out of range"
 
-    if key == 0 or key == 9 or key == 17 or key == 25 or key == 33 or key == 41 or key == 49 or key == 57 or key == 65 or key == 73:
-            cell_column = 0
+    if key in range(0,80,9):
+        cell_column = puzzle_rows[0]
+    elif key in range(1,80,9):
+        cell_column = puzzle_rows[1]
+    elif key in range(2,80,9):
+        cell_column = puzzle_rows[2]
+    elif key in range(3,80,9):
+        cell_column = puzzle_rows[3]
+    elif key in range(4,80,9):
+        cell_column = puzzle_rows[4]
+    elif key in range(5,80,9):
+        cell_column = puzzle_rows[5]
+    elif key in range(6,80,9):
+        cell_column = puzzle_rows[6]
+    elif key in range(7,80,9):
+        cell_column = puzzle_rows[7]
+    elif key in range(8,81,9):
+        cell_column = puzzle_rows[8]
     else:
         print "other column"
 
