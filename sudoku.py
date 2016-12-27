@@ -84,7 +84,12 @@ def box_ref(puzzle_str):
     print "here are the boxes"
     print puzzle_boxes_final
 
-    #NEXT STEP: make reference table so that you know the row, column, and box for a given cell
+#NEXT STEP: make reference table so that you know the row, column, and box for a given cell
+
+def cell_reference(dict, row, column, box)
+    for cell in dict:
+        if 0 =< cell && cell >= 8:
+
 
 
 practice_puzzle = "105802000090076405200400819019007306762083090000061050007600030430020501600308900"
@@ -92,3 +97,4 @@ puzzle_dict(practice_puzzle)
 row_ref(practice_puzzle)
 column_ref(practice_puzzle)
 box_ref(practice_puzzle)
+cell_refernce(puzzle_dict, row_ref, column_ref, box_ref)
