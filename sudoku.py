@@ -206,10 +206,16 @@ def solution_collector(live_puzzle_dict):
             else:
               # this is if num == 0
               possible_solutions = filter(lambda x: x in area, possible_nums)
-              possible_solutions = set(possible_solutions_subset)
+
+    # fix this to get unique solutions for arrays
+    possible_solutions = set(possible_solutions_subset)
     value.append(possible_solutions)
 
-  print live_puzzle_dict
+
+  print possible_solutions
+
+
+  # print live_puzzle_dict
 
 
 
