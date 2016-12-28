@@ -200,11 +200,12 @@ def solution_collector(live_puzzle_dict):
   for key, value in live_puzzle_dict.iteritems():
       for area in value:
           for num,item in enumerate(area):
-            for possibility in entry_list:
+            for possibility in entry_list: 
               if possibility != item:
                 temp_array = []
                 temp_array.append(possibility)
                 live_puzzle_dict[key].append(temp_array)
+                live_puzzle_dict[key].append("does this work?")
               else:
                 item = item
   print "hey there"
