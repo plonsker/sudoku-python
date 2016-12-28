@@ -194,21 +194,31 @@ def cell_reference(dict, row, column, box):
     print live_puzzle_dict
 
 def solution_collector(live_puzzle_dict):
-  entry_list = [1,2,3,4,5,6,7,8,9]
+  possible_nums = [1,2,3,4,5,6,7,8,9]
+  possible_solutions = []
+
+  for key,value in live_puzzle_dict.iteritems():
+    for area in value:
+        for num,item in enumerate(area):
+            if item in possible_nums:
+              num = num
+            else:
+              # this is if num == 0
+              possible_solutions = filter(lambda x: x not in area, possible_nums)
+              value.append(possible_solutions)
 
 
-  for key, value in live_puzzle_dict.iteritems():
-      for area in value:
-          for num,item in enumerate(area):
-            for possibility in entry_list: 
-              if possibility != item:
-                temp_array = []
-                temp_array.append(possibility)
-                live_puzzle_dict[key].append(temp_array)
-                live_puzzle_dict[key].append("does this work?")
-              else:
-                item = item
+
+  print live_puzzle_dict
+
+
+
+  # print live_puzzle_dict
+
+
+
   print "hey there"
+
 
 
 
@@ -223,8 +233,7 @@ def solution_collector(live_puzzle_dict):
 
 
 
-  print live_puzzle_dict
-  print "sup"
+
 
 
 
