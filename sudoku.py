@@ -195,6 +195,7 @@ def cell_reference(dict, row, column, box):
 
 def solution_collector(live_puzzle_dict):
   possible_nums = [1,2,3,4,5,6,7,8,9]
+  possible_solutions_subset = []
   possible_solutions = []
 
   for key,value in live_puzzle_dict.iteritems():
@@ -204,10 +205,9 @@ def solution_collector(live_puzzle_dict):
               num = num
             else:
               # this is if num == 0
-              possible_solutions = filter(lambda x: x not in area, possible_nums)
-              value.append(possible_solutions)
-
-
+              possible_solutions = filter(lambda x: x in area, possible_nums)
+              possible_solutions = set(possible_solutions_subset)
+    value.append(possible_solutions)
 
   print live_puzzle_dict
 
