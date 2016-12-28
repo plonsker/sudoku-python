@@ -90,7 +90,7 @@ def box_ref(puzzle_str):
 
 #NEXT STEP: make reference table so that you know the row, column, and box for a given cell
 
-def cell_reference(dict, row, column):
+def cell_reference(dict, row, column, cell_box):
   for key, value in puzzle_master.iteritems():
     print "start rows"
     if key in range(0,8):
@@ -121,7 +121,7 @@ def cell_reference(dict, row, column):
         cell_row = row[8]
         print row[8]
     else:
-        print "Error. Row must be out of range"
+        print "error. row is out of range"
 
     #columns
     if key in range(0,80,9):
@@ -152,29 +152,37 @@ def cell_reference(dict, row, column):
         cell_column = puzzle_columns[8]
         print column[8]
     else:
-        print "other column"
+        print "error. column out of range"
 
     if key in range(0,3) or key in range(9,12) or key in range (18,21):
-        cell_box = puzzle_boxes[0]
-        print puzzle_boxes[0]
+        cell_box = puzzle_boxes_final[0]
+        print puzzle_boxes_final[0]
     elif key in range(3,6) or key in range(12,15) or key in range (21,24):
-        cell_box = puzzle_boxes[1]
-        print puzzle_boxes[1]
+        cell_box = puzzle_boxes_final[1]
+        print puzzle_boxes_final[1]
     elif key in range(6,9) or key in range(15,18) or key in range (24,27):
-        cell_box = puzzle_boxes[2]
-        print puzzle_boxes[2]
+        cell_box = puzzle_boxes_final[2]
+        print puzzle_boxes_final[2]
     elif key in range(27,30) or key in range(36,39) or key in range (45,48):
-        cell_box = puzzle_boxes[3]
-        print puzzle_boxes[3]
+        cell_box = puzzle_boxes_final[3]
+        print puzzle_boxes_final[3]
     elif key in range(30,33) or key in range(39,42) or key in range (48,51):
-        cell_box = puzzle_boxes[4]
-        print puzzle_boxes[4]
+        cell_box = puzzle_boxes_final[4]
+        print puzzle_boxes_final[4]
     elif key in range(33,36) or key in range(42,45) or key in range (51,53):
-        cell_box = puzzle_boxes[5]
-        print puzzle_boxes[5]
+        cell_box = puzzle_boxes_final[5]
+        print puzzle_boxes_final[5]
     elif key in range(54,57) or key in range(63,66) or key in range (72,75):
-        cell_box = puzzle_boxes[6]
-        print puzzle_boxes[6]
+        cell_box = puzzle_boxes_final[6]
+        print puzzle_boxes_final[6]
+    elif key in range(57,60) or key in range(66,69) or key in range (75,78):
+        cell_box = puzzle_boxes_final[7]
+        print puzzle_boxes_final[7]
+    elif key in range(60,63) or key in range(69,71) or key in range (78,81):
+        cell_box = puzzle_boxes_final[8]
+        print puzzle_boxes_final[8]
+    else:
+        "error. box out of range"
     # finish this
 
 
@@ -184,4 +192,4 @@ puzzle_dict(practice_puzzle)
 row_ref(practice_puzzle)
 column_ref(practice_puzzle)
 box_ref(practice_puzzle)
-cell_reference(puzzle_master, puzzle_rows, puzzle_columns)
+cell_reference(puzzle_master, puzzle_rows, puzzle_columns, puzzle_boxes_final)
