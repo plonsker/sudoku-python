@@ -1,5 +1,5 @@
 #no classes for now. this is an experiment with just methods.
-
+from random import randint
 
 def puzzle_dict(puzzle_str):
     global puzzle_master
@@ -193,15 +193,38 @@ def cell_reference(dict, row, column, box):
 
     print live_puzzle_dict
 
-def solver():
+def solution_collector(live_puzzle_dict):
+  entry_list = [1,2,3,4,5,6,7,8,9]
+
+
   for key, value in live_puzzle_dict.iteritems():
       for area in value:
-        for num,item in enumerate(area):
-            if item == 0:
-              area[num] = "X"
+          for num,item in enumerate(area):
+            for possibility in entry_list:
+              if possibility != item:
+                temp_array = []
+                temp_array.append(possibility)
+                live_puzzle_dict[key].append(temp_array)
+              else:
+                item = item
+  print "hey there"
+
+
+
+
+
+# def solver():
+#   for key, value in live_puzzle_dict.iteritems():
+#       for area in value:
+#         for num,item in enumerate(area):
+#             if item == 0:
+#               area[num] = randint(0,9)
+
+
 
   print live_puzzle_dict
   print "sup"
+
 
 
 
@@ -211,4 +234,4 @@ row_ref(practice_puzzle)
 column_ref(practice_puzzle)
 box_ref(practice_puzzle)
 cell_reference(puzzle_master, puzzle_rows, puzzle_columns, puzzle_boxes_final)
-solver()
+solution_collector(live_puzzle_dict)
