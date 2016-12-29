@@ -98,8 +98,8 @@ def cell_reference(dict, row, column, box):
 
   for key, value in puzzle_master.iteritems():
     live_puzzle_dict[key] = []
-    print "start rows"
-    if key in range(0,8):
+    # print "start rows"
+    if key in range(0,9):
         cell_row = row[0]
         live_puzzle_dict[key].append(row[0])
     elif key in range(9,18):
@@ -192,14 +192,14 @@ def cell_reference(dict, row, column, box):
         "error. box out of range"
     # finish this
 
-    print live_puzzle_dict
+    # print live_puzzle_dict
 
 def solution_collector(live_puzzle_dict):
+  possible_solutions = live_puzzle_dict
   possible_nums = [1,2,3,4,5,6,7,8,9]
   possible_solutions_subset = []
-  possible_solutions = []
 
-  for key,value in live_puzzle_dict.iteritems():
+  for key,value in possible_solutions.iteritems():
     for area in value:
         for num,item in enumerate(area):
             if item in possible_nums:
@@ -209,16 +209,21 @@ def solution_collector(live_puzzle_dict):
               possible_solutions_subset = filter(lambda x: x in area, possible_nums)
               value.append(possible_solutions_subset)
 
-              # maybe just remove all items that aren't rows from the live puzzle dictionary
 
 
-  # for key,value in live_puzzle_dict.iteritems():
+  for key,value in possible_solutions.iteritems():
+    del value[:3]
 
-    # fix this to get unique solutions for arrays
-    # possible_solutions = set(possible_solutions_subset)
-    # value.append(possible_solutions_subset)
+  for key,value in possible_solutions.iteritems():
+    unique_solutions = []
+    for elem in value:
+      if elem not in unique_solutions:
+        unique_solutions.append(elem)
+    del value[:]
+    value.append(unique_solutions)
 
-  print live_puzzle_dict
+  print possible_solutions
+
 
 
 
