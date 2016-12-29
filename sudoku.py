@@ -195,6 +195,7 @@ def cell_reference(dict, row, column, box):
     # print live_puzzle_dict
 
 def solution_collector(live_puzzle_dict):
+  global possible_solutions
   possible_solutions = live_puzzle_dict
   possible_nums = [1,2,3,4,5,6,7,8,9]
   possible_solutions_subset = []
@@ -202,11 +203,9 @@ def solution_collector(live_puzzle_dict):
   for key,value in possible_solutions.iteritems():
     for area in value:
         for num,item in enumerate(area):
-            if item in possible_nums:
-              num = num
-            else:
+            if item not in possible_nums:
               # this is if num == 0
-              possible_solutions_subset = filter(lambda x: x in area, possible_nums)
+              possible_solutions_subset = filter(lambda x: x not in area, possible_nums)
               value.append(possible_solutions_subset)
 
 
@@ -220,15 +219,20 @@ def solution_collector(live_puzzle_dict):
       if elem not in unique_solutions:
         unique_solutions.append(elem)
     del value[:]
-    value.append(unique_solutions)
+    for elem in unique_solutions:
+      value.append(elem)
 
   print possible_solutions
 
+  # print live_puzzle_dict
 
 
+#at this point, we have two dictionaries.
+#one that references cells (live_puzzle_dict)
+#one that references possible entries in that cell (possible solution)
 
-
-
+#for each possible solution for a cell,
+#if it can go in a row, column, and box, that's the correct solution
 
 
 practice_puzzle = "105802000090076405200400819019007306762083090000061050007600030430020501600308900"
