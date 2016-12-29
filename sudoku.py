@@ -229,7 +229,10 @@ def solution_collector(live_puzzle_dict):
 
 #at this point, we have two dictionaries.
 #one that references cells (live_puzzle_dict)
-#one that references possible entries in that cell
+#one that references possible entries in that cell (possible solution)
+
+#for each possible solution for a cell,
+#if it can go in a row, column, and box, that's the correct solution
 
 
 practice_puzzle = "105802000090076405200400819019007306762083090000061050007600030430020501600308900"
