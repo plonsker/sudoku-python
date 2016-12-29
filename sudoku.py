@@ -195,6 +195,7 @@ def cell_reference(dict, row, column, box):
     # print live_puzzle_dict
 
 def solution_collector(live_puzzle_dict):
+  global possible_solutions
   possible_solutions = live_puzzle_dict
   possible_nums = [1,2,3,4,5,6,7,8,9]
   possible_solutions_subset = []
@@ -220,7 +221,8 @@ def solution_collector(live_puzzle_dict):
       if elem not in unique_solutions:
         unique_solutions.append(elem)
     del value[:]
-    value.append(unique_solutions)
+    for elem in unique_solutions:
+      value.append(elem)
 
   print possible_solutions
 
