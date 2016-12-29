@@ -203,11 +203,9 @@ def solution_collector(live_puzzle_dict):
   for key,value in possible_solutions.iteritems():
     for area in value:
         for num,item in enumerate(area):
-            if item in possible_nums:
-              num = num
-            else:
+            if item not in possible_nums:
               # this is if num == 0
-              possible_solutions_subset = filter(lambda x: x in area, possible_nums)
+              possible_solutions_subset = filter(lambda x: x not in area, possible_nums)
               value.append(possible_solutions_subset)
 
 
@@ -225,6 +223,8 @@ def solution_collector(live_puzzle_dict):
       value.append(elem)
 
   print possible_solutions
+
+  # print live_puzzle_dict
 
 
 
