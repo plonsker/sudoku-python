@@ -207,9 +207,9 @@ def solution_collector(live_puzzle_dict):
             else:
               # this is if num == 0
               possible_solutions_subset = filter(lambda x: x in area, possible_nums)
-              for i in possible_solutions_subset:
-                if i not in value:
-                  value.append(i)
+              value.append(possible_solutions_subset)
+
+              # maybe just remove all items that aren't rows from the live puzzle dictionary
 
 
   # for key,value in live_puzzle_dict.iteritems():
