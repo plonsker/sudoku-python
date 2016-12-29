@@ -1,5 +1,6 @@
 #no classes for now. this is an experiment with just methods.
 from random import randint
+from collections import OrderedDict
 
 def puzzle_dict(puzzle_str):
     global puzzle_master
@@ -205,38 +206,19 @@ def solution_collector(live_puzzle_dict):
               num = num
             else:
               # this is if num == 0
-              possible_solutions = filter(lambda x: x in area, possible_nums)
+              possible_solutions_subset = filter(lambda x: x in area, possible_nums)
+              value.append(possible_solutions_subset)
+
+              # maybe just remove all items that aren't rows from the live puzzle dictionary
+
+
+  # for key,value in live_puzzle_dict.iteritems():
 
     # fix this to get unique solutions for arrays
-    possible_solutions = set(possible_solutions_subset)
-    value.append(possible_solutions)
+    # possible_solutions = set(possible_solutions_subset)
+    # value.append(possible_solutions_subset)
 
-
-  print possible_solutions
-
-
-  # print live_puzzle_dict
-
-
-
-  # print live_puzzle_dict
-
-
-
-  print "hey there"
-
-
-
-
-
-
-# def solver():
-#   for key, value in live_puzzle_dict.iteritems():
-#       for area in value:
-#         for num,item in enumerate(area):
-#             if item == 0:
-#               area[num] = randint(0,9)
-
+  print live_puzzle_dict
 
 
 
