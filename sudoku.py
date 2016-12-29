@@ -1,6 +1,7 @@
 #no classes for now. this is an experiment with just methods.
 from random import randint
 from collections import OrderedDict
+import copy
 
 def puzzle_dict(puzzle_str):
     global puzzle_master
@@ -192,17 +193,19 @@ def cell_reference(dict, row, column, box):
         "error. box out of range"
     # finish this
 
-    # print live_puzzle_dict
+  print live_puzzle_dict
+  print "next is solution collector"
 
 def solution_collector(live_puzzle_dict):
   global possible_solutions
-  possible_solutions = live_puzzle_dict
+  possible_solutions = copy.deepcopy(live_puzzle_dict)
   possible_nums = [1,2,3,4,5,6,7,8,9]
   possible_solutions_subset = []
 
   for key,value in possible_solutions.iteritems():
     for area in value:
         for num,item in enumerate(area):
+          if num == 0:
             if item not in possible_nums:
               # this is if num == 0
               possible_solutions_subset = filter(lambda x: x not in area, possible_nums)
@@ -222,14 +225,33 @@ def solution_collector(live_puzzle_dict):
     for elem in unique_solutions:
       value.append(elem)
 
-  print possible_solutions
+  print live_puzzle_dict
 
-  # print live_puzzle_dict
 
 
 #at this point, we have two dictionaries.
 #one that references cells (live_puzzle_dict)
 #one that references possible entries in that cell (possible solution)
+
+def solver(live_puzzle_dict,possible_solutions):
+    for key,value in possible_solutions.iteritems():
+      if len(value) == 3:
+        filtered_list = [x for x in value[0] if x in value[1] and x in value[2]]
+        print filtered_list
+        del value[:]
+        value.append(filtered_list)
+
+
+      # if len(value) == 2:
+      #     filtered_list = [x for x in value[0] if x in value[1]]
+      #     print filtered_list
+      #     del value[:]
+      #     value.append(filtered_list)
+
+    print possible_solutions
+
+    # print live_puzzle_dict
+
 
 #for each possible solution for a cell,
 #if it can go in a row, column, and box, that's the correct solution
@@ -242,3 +264,4 @@ column_ref(practice_puzzle)
 box_ref(practice_puzzle)
 cell_reference(puzzle_master, puzzle_rows, puzzle_columns, puzzle_boxes_final)
 solution_collector(live_puzzle_dict)
+solver(live_puzzle_dict, possible_solutions)
