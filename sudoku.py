@@ -302,14 +302,18 @@ def solver(puzzle_master,live_puzzle_dict,possible_solutions):
   temp_puzzle = ''.join(map(str, (puzzle_master.values())))
   print temp_puzzle
 
-  while len(x) > len(set(x)):
-      puzzle_dict(temp_puzzle)
-      row_ref(temp_puzzle)
-      column_ref(temp_puzzle)
-      box_ref(temp_puzzle)
-      cell_reference(puzzle_master, puzzle_rows, puzzle_columns, puzzle_boxes_final)
-      if len(x) == len(set(x)):
-          print temp_puzzle
+
+  for key,value in live_puzzle_dict.iteritems():
+      while 9 > len(set(value[0])) and 9 > len(set(value[1])) and 9 > len(set(value[2])):
+          puzzle_dict(temp_puzzle)
+          row_ref(temp_puzzle)
+          column_ref(temp_puzzle)
+          box_ref(temp_puzzle)
+          cell_reference(puzzle_master, puzzle_rows, puzzle_columns, puzzle_boxes_final)
+          if 9 == len(set(value[0])) and 9 == len(set(value[1])) and 9 == len(set(value[2])):
+              print temp_puzzle
+              break
+
 
 
 
