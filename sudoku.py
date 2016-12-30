@@ -205,7 +205,9 @@ def solution_collector(live_puzzle_dict):
   for key,value in possible_solutions.iteritems():
     for area in value:
         for num,item in enumerate(area):
-          if item == 0:
+          if item != 0:
+            item = item
+          else:
             if item not in possible_nums:
               # this is if num == 0
               possible_solutions_subset = filter(lambda x: x not in area, possible_nums)
@@ -238,19 +240,28 @@ def solver(live_puzzle_dict,possible_solutions):
     for key,value in possible_solutions.iteritems():
       if len(value) == 3:
         filtered_list = [x for x in value[0] if x in value[1] and x in value[2]]
-        print filtered_list
+        # print filtered_list
         del value[:]
         value.append(filtered_list)
 
       if len(value) == 2:
           filtered_list = [x for x in value[0] if x in value[1]]
-          print filtered_list
+          # print filtered_list
           del value[:]
           value.append(filtered_list)
 
     print possible_solutions
 
     # print live_puzzle_dict
+
+    for key,value in puzzle_master.iteritems():
+      if value != 0:
+        del possible_solutions[key]
+
+    print possible_solutions
+
+
+
 
 
 #for each possible solution for a cell,
