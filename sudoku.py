@@ -297,29 +297,55 @@ def solver(puzzle_master,live_puzzle_dict,possible_solutions):
 
 
 
-  print "this is the master"
-  print puzzle_master
+  # print "this is the master"
+  # print puzzle_master
   temp_puzzle = ''.join(map(str, (puzzle_master.values())))
-  print temp_puzzle
+  # print temp_puzzle
 
-  print live_puzzle_dict[0][0]
-  print set(live_puzzle_dict[0][0])
-  print len(set(live_puzzle_dict[0][0]))
+  # print live_puzzle_dict[0][0]
+  # print set(live_puzzle_dict[0][0])
+  # print len(set(live_puzzle_dict[0][0]))
+
+  already_seen = []
+
+
+
+
   for key,value in live_puzzle_dict.iteritems():
-      print len(set(live_puzzle_dict[0][0]))
-      while 9 > len(set(value[0])) and 9 > len(set(value[1])) and 9 > len(set(value[2])):
+    #   print len(set(live_puzzle_dict[0][0]))
+    #   print value[0][:]
+    #   print len(set(value[0][:]))
+    #   print value[1][:]
+    #   print len(set(value[1][:]))
+    #   print value[-1][:]
+    #   print len(set(value[-1][:]))
+    #   print value[2][:]
+    #   print set(value[:])
+
+    #   print len(set(value[1]))
+      print "reference"
+    #   print live_puzzle_dict
+      print len(set(live_puzzle_dict[0][2]))
+
+      if 9 > len(set(live_puzzle_dict[0][0])):
+          print "hey"
           puzzle_dict(temp_puzzle)
           row_ref(temp_puzzle)
           column_ref(temp_puzzle)
           box_ref(temp_puzzle)
           cell_reference(puzzle_master, puzzle_rows, puzzle_columns, puzzle_boxes_final)
-      if 9 == len(set(value[0])) and 9 == len(set(value[1])) and 9 == len(set(value[2])):
           print temp_puzzle
+
+      if 9 == len(set(live_puzzle_dict[0][0])):
+        #   print live_puzzle_dict[46][0]
+        #   print len(set(value[0][:]))
+          print temp_puzzle
+          print "the end"
           break
     #this solution works! however, it's not efficient. change it so that combos that don't work don't get generated again
 
-
-
+# if temp_puzzle not in already_seen:
+#    already_seen.add(temp_puzzle)
 
 
 
@@ -329,8 +355,8 @@ def solver(puzzle_master,live_puzzle_dict,possible_solutions):
 #if it can go in a row, column, and box, that's the correct solution
 
 
-# practice_puzzle = "105802000090076405200400819019007306762083090000061050007600030430020501600308900"
-practice_puzzle = "046857913189643275573291486418329567637485129952176348764532891321968754895714630"
+practice_puzzle = "105802000090076405200400819019007306762083090000061050007600030430020501600308900"
+# practice_puzzle = "006857913189643275573291486418329567637485129952176348764532891321968754895714632"
 puzzle_dict(practice_puzzle)
 row_ref(practice_puzzle)
 column_ref(practice_puzzle)
