@@ -327,21 +327,23 @@ def solver(puzzle_master,live_puzzle_dict,possible_solutions):
     #   print live_puzzle_dict
       print len(set(live_puzzle_dict[0][2]))
 
-      if 9 > len(set(live_puzzle_dict[0][0])):
-          print "hey"
-          puzzle_dict(temp_puzzle)
-          row_ref(temp_puzzle)
-          column_ref(temp_puzzle)
-          box_ref(temp_puzzle)
-          cell_reference(puzzle_master, puzzle_rows, puzzle_columns, puzzle_boxes_final)
-          print temp_puzzle
-
-      if 9 == len(set(live_puzzle_dict[0][0])):
-        #   print live_puzzle_dict[46][0]
-        #   print len(set(value[0][:]))
-          print temp_puzzle
-          print "the end"
-          break
+      i = 0
+      for key,value in live_puzzle_dict.iteritems():
+          i = 0
+          while 9 > len(set(live_puzzle_dict[i][0])) and 9 > len(set(live_puzzle_dict[i][1])) and 9 > len(set(live_puzzle_dict[i][-1])):
+              print "hey"
+              puzzle_dict(temp_puzzle)
+              row_ref(temp_puzzle)
+              column_ref(temp_puzzle)
+              box_ref(temp_puzzle)
+              print temp_puzzle
+              solver(puzzle_master,live_puzzle_dict,possible_solutions)
+              if len(set(live_puzzle_dict[i][0])) == 9 and len(set(live_puzzle_dict[i][1])) == 9 and len(set(live_puzzle_dict[i][-1])):
+                  cell_reference(puzzle_master, puzzle_rows, puzzle_columns, puzzle_boxes_final)
+                  print temp_puzzle
+                  print "the end"
+                  break
+              i+=1
     #this solution works! however, it's not efficient. change it so that combos that don't work don't get generated again
 
 # if temp_puzzle not in already_seen:
