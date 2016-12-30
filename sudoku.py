@@ -4,6 +4,9 @@ from collections import OrderedDict
 import copy
 import random
 
+# def solved?(puzzle_master)
+#     False if 0 in puzzle_master.values():
+
 def puzzle_dict(puzzle_str):
     global puzzle_master
     puzzle_str_arr = list(puzzle_str)
@@ -267,14 +270,16 @@ def solutions_filter(live_puzzle_dict,possible_solutions):
 def solver(puzzle_master,live_puzzle_dict,possible_solutions):
   print puzzle_master
   for key,value in puzzle_master.iteritems():
-    if value == 0:
-      for key,value in possible_solutions.iteritems():
-        i = 0
-        while i <= key:
-          # the following iteration is broken
-          insertions = [x for x in key[i] if x not in live_puzzle_dict[0][0] and x not in live_puzzle_dict[0][1] and x not in live_puzzle_dict[0][2]]
-          i+=1
-          puzzle_master[key] = insertions
+      if puzzle_master[key] == 0:
+          puzzle_master[key] = "x"
+          print "hey"
+    #   for key,value in possible_solutions.iteritems():
+    #     i = 0
+    #     while i <= key:
+    #       # the following iteration is broken
+    #       insertions = [x for x in key[i] if x not in live_puzzle_dict[0][0] and x not in live_puzzle_dict[0][1] and x not in live_puzzle_dict[0][2]]
+    #       i+=1
+    #       puzzle_master[key] = insertions
 
   print puzzle_master
   # print live_puzzle_dict
