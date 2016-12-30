@@ -2,6 +2,7 @@
 from random import randint
 from collections import OrderedDict
 import copy
+import random
 
 def puzzle_dict(puzzle_str):
     global puzzle_master
@@ -236,7 +237,7 @@ def solution_collector(live_puzzle_dict):
 #one that references cells (live_puzzle_dict)
 #one that references possible entries in that cell (possible solution)
 
-def solver(live_puzzle_dict,possible_solutions):
+def solutions_filter(live_puzzle_dict,possible_solutions):
     for key,value in possible_solutions.iteritems():
       if len(value) == 3:
         filtered_list = [x for x in value[0] if x in value[1] and x in value[2]]
@@ -260,6 +261,15 @@ def solver(live_puzzle_dict,possible_solutions):
 
     print possible_solutions
 
+def solver(puzzle_master,live_puzzle_dict,possible_solutions):
+  for key,value in puzzle_master.iteritems():
+    i = 0
+    if value == 0:
+      #if the value is zero, i want you to pick a number from the corresponding index in possible_solutions and put it in the puzzle. keep doing this until puzzle is solved
+        puzzle_master[key] = random.choice(possible_solutions[key][value])
+
+  print puzzle_master
+  print live_puzzle_dict
 
 
 
@@ -275,4 +285,5 @@ column_ref(practice_puzzle)
 box_ref(practice_puzzle)
 cell_reference(puzzle_master, puzzle_rows, puzzle_columns, puzzle_boxes_final)
 solution_collector(live_puzzle_dict)
-solver(live_puzzle_dict, possible_solutions)
+solutions_filter(live_puzzle_dict, possible_solutions)
+solver(puzzle_master,live_puzzle_dict,possible_solutions)
