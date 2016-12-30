@@ -287,12 +287,32 @@ def solver(puzzle_master,live_puzzle_dict,possible_solutions):
 
   for key,value in puzzle_master.iteritems():
     #  when refactoring this, try duck-typing instead of asking if something is a list
-      if isinstance(value, list):
-          print "sup"
-      else:
-          print "yo"
-  # print live_puzzle_dict
-  # print live_puzzle_dict[key][0][0]
+    #   if isinstance(value, list):
+    #       print "sup"
+    #   else:
+    #       print "yo"
+    if isinstance(value, list):
+        puzzle_master[key] = random.choice(value)
+
+
+
+
+  print "this is the master"
+  print puzzle_master
+  temp_puzzle = ''.join(map(str, (puzzle_master.values())))
+  print temp_puzzle
+
+  while len(x) > len(set(x)):
+      puzzle_dict(temp_puzzle)
+      row_ref(temp_puzzle)
+      column_ref(temp_puzzle)
+      box_ref(temp_puzzle)
+      cell_reference(puzzle_master, puzzle_rows, puzzle_columns, puzzle_boxes_final)
+      if len(x) == len(set(x)):
+          print temp_puzzle
+
+
+
 
 
 
@@ -310,3 +330,4 @@ cell_reference(puzzle_master, puzzle_rows, puzzle_columns, puzzle_boxes_final)
 solution_collector(live_puzzle_dict)
 solutions_filter(live_puzzle_dict, possible_solutions)
 solver(puzzle_master,live_puzzle_dict,possible_solutions)
+# cell_reference(puzzle_master, puzzle_rows, puzzle_columns, puzzle_boxes_final)
