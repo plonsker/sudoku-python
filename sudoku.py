@@ -269,17 +269,28 @@ def solutions_filter(live_puzzle_dict,possible_solutions):
 
 def solver(puzzle_master,live_puzzle_dict,possible_solutions):
   print puzzle_master
+  print ""
+  print ""
+  print ""
   for key,value in puzzle_master.iteritems():
       if puzzle_master[key] == 0:
-        #   keep the next two lines of code for reference
-        #   puzzle_master[key] = "x"
-        #   print "hey"
           for key,value in possible_solutions.iteritems():
-              # the following iteration is broken
               insertions = [x for x in possible_solutions[key] if x not in live_puzzle_dict[key]]
               puzzle_master[key] = [item for sublist in insertions for item in sublist]
+              if len(puzzle_master[key]) == 1:
+                  puzzle_master[key] = map(str, puzzle_master[key])
+                  puzzle_master[key] = ''.join(puzzle_master[key])
+                  puzzle_master[key] = int(puzzle_master[key])
+
 
   print puzzle_master
+
+  for key,value in puzzle_master.iteritems():
+    #  when refactoring this, try duck-typing instead of asking if something is a list
+      if isinstance(value, list):
+          print "sup"
+      else:
+          print "yo"
   # print live_puzzle_dict
   # print live_puzzle_dict[key][0][0]
 
