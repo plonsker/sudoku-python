@@ -259,17 +259,25 @@ def solutions_filter(live_puzzle_dict,possible_solutions):
       if value != 0:
         del possible_solutions[key]
 
-    print possible_solutions
+    # print possible_solutions
+
+  # print possible_solutions[key][value]
+      #if the value is zero, i want you to pick a number from the corresponding index in possible_solutions and put it in the puzzle. keep doing this until puzzle is solved
 
 def solver(puzzle_master,live_puzzle_dict,possible_solutions):
+  print puzzle_master
   for key,value in puzzle_master.iteritems():
-    i = 0
     if value == 0:
-      #if the value is zero, i want you to pick a number from the corresponding index in possible_solutions and put it in the puzzle. keep doing this until puzzle is solved
-        puzzle_master[key] = random.choice(possible_solutions[key][value])
+      for key,value in possible_solutions.iteritems():
+        i = 0
+        while i <= key:
+          insertions = [x for x in possible_solutions[key] if x not in live_puzzle_dict[0] and x not in live_puzzle_dict[1] and x not in live_puzzle_dict[2]]
+          i+=1
+        puzzle_master[key] = insertions
+
 
   print puzzle_master
-  print live_puzzle_dict
+  # print live_puzzle_dict[key][0][0]
 
 
 
