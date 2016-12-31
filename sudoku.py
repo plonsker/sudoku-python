@@ -14,26 +14,16 @@ def puzzle_dict(puzzle_str):
 
     puzzle_master = {k:int(v) if v.isdigit() else v for k,v in puzzle_master.items()}
 
-
-    # print "Here is the dictionary"
-    # print puzzle_master
-
-
 def row_ref(puzzle_str):
     global puzzle_rows
-    #try and get this to be integers here
     puzzle_str = [ int(x) for x in puzzle_str ]
     puzzle_rows = [puzzle_str[x:x+9] for x in range(0, len(puzzle_str),9)]
     puzzle_rows = [list(cell) for cell in puzzle_rows]
-    # print "Here are the rows"
-    # print puzzle_rows
 
 def column_ref(puzzle_str):
     global puzzle_columns
     puzzle_str = [ int(x) for x in puzzle_str ]
     puzzle_columns = map(list, zip(*([puzzle_str[x:x+9] for x in range(0, len(puzzle_str),9)])))
-    # print "here are the colums"
-    # print puzzle_columns
 
 def box_ref(puzzle_str):
     global puzzle_boxes_final
@@ -42,8 +32,6 @@ def box_ref(puzzle_str):
     puzzle_box_rows = [list(cell) for cell in puzzle_box_rows]
 
     puzzle_boxes = map(list, zip(*([puzzle_box_rows[x:x+3] for x in range(0, len(puzzle_box_rows),3)])))
-
-    # print puzzle_boxes
 
     temp_flat = []
     for sublist in puzzle_boxes:
@@ -92,18 +80,13 @@ def box_ref(puzzle_str):
     puzzle_boxes_final.append(box_7)
     puzzle_boxes_final.append(box_8)
 
-    # print "here are the boxes"
-    # print puzzle_boxes_final
-
-#NEXT STEP: make reference table so that you know the row, column, and box for a given cell
-
 def cell_reference(dict, row, column, box):
   global live_puzzle_dict
   live_puzzle_dict = {}
 
   for key, value in puzzle_master.iteritems():
     live_puzzle_dict[key] = []
-    # print "start rows"
+
     if key in range(0,9):
         cell_row = row[0]
         live_puzzle_dict[key].append(row[0])
@@ -195,10 +178,6 @@ def cell_reference(dict, row, column, box):
         live_puzzle_dict[key].append(puzzle_boxes_final[8])
     else:
         "error. box out of range"
-    # finish this
-
-  # print live_puzzle_dict
-  # print "next is solution collector"
 
 def solution_collector(live_puzzle_dict):
   global possible_solutions
@@ -217,8 +196,6 @@ def solution_collector(live_puzzle_dict):
               possible_solutions_subset = filter(lambda x: x not in area, possible_nums)
               value.append(possible_solutions_subset)
 
-
-
   for key,value in possible_solutions.iteritems():
     del value[:3]
 
@@ -231,47 +208,27 @@ def solution_collector(live_puzzle_dict):
     for elem in unique_solutions:
       value.append(elem)
 
-  # print live_puzzle_dict
   print possible_solutions
-
-
-
-#at this point, we have two dictionaries.
-#one that references cells (live_puzzle_dict)
-#one that references possible entries in that cell (possible solution)
 
 def solutions_filter(live_puzzle_dict,possible_solutions):
     for key,value in possible_solutions.iteritems():
       if len(value) == 3:
         filtered_list = [x for x in value[0] if x in value[1] and x in value[2]]
-        # print filtered_list
         del value[:]
         value.append(filtered_list)
 
       if len(value) == 2:
           filtered_list = [x for x in value[0] if x in value[1]]
-          # print filtered_list
           del value[:]
           value.append(filtered_list)
 
     print possible_solutions
 
-    # print live_puzzle_dict
-
     for key,value in puzzle_master.iteritems():
       if value != 0:
         del possible_solutions[key]
 
-    # print possible_solutions
-
-  # print possible_solutions[key][value]
-      #if the value is zero, i want you to pick a number from the corresponding index in possible_solutions and put it in the puzzle. keep doing this until puzzle is solved
-
 def solver(puzzle_master,live_puzzle_dict,possible_solutions):
-  print puzzle_master
-  print ""
-  print ""
-  print ""
   for key,value in puzzle_master.iteritems():
       if puzzle_master[key] == 0:
           for key,value in possible_solutions.iteritems():
@@ -286,80 +243,31 @@ def solver(puzzle_master,live_puzzle_dict,possible_solutions):
   print puzzle_master
 
   for key,value in puzzle_master.iteritems():
-    #  when refactoring this, try duck-typing instead of asking if something is a list
-    #   if isinstance(value, list):
-    #       print "sup"
-    #   else:
-    #       print "yo"
     if isinstance(value, list):
         puzzle_master[key] = random.choice(value)
 
-
-
-
-  # print "this is the master"
-  # print puzzle_master
   temp_puzzle = ''.join(map(str, (puzzle_master.values())))
-  # print temp_puzzle
-
-  # print live_puzzle_dict[0][0]
-  # print set(live_puzzle_dict[0][0])
-  # print len(set(live_puzzle_dict[0][0]))
-
-  already_seen = []
-
-
-
 
   for key,value in live_puzzle_dict.iteritems():
-    #   print len(set(live_puzzle_dict[0][0]))
-    #   print value[0][:]
-    #   print len(set(value[0][:]))
-    #   print value[1][:]
-    #   print len(set(value[1][:]))
-    #   print value[-1][:]
-    #   print len(set(value[-1][:]))
-    #   print value[2][:]
-    #   print set(value[:])
-
-    #   print len(set(value[1]))
-      print "reference"
-    #   print live_puzzle_dict
-      print len(set(live_puzzle_dict[0][2]))
-
-      i = 0
       for key,value in live_puzzle_dict.iteritems():
           i = 0
-          while 9 > len(set(live_puzzle_dict[i][0])) and 9 > len(set(live_puzzle_dict[i][1])) and 9 > len(set(live_puzzle_dict[i][-1])):
-              print "hey"
+          while i < 81 and len(set(live_puzzle_dict[i][0])) and 9 > len(set(live_puzzle_dict[i][1])) and 9 > len(set(live_puzzle_dict[i][-1])):
+            #   print "hey"
               puzzle_dict(temp_puzzle)
               row_ref(temp_puzzle)
               column_ref(temp_puzzle)
               box_ref(temp_puzzle)
               print temp_puzzle
             #   this breaks the alogrithm. stack level too deep.
-              solver(puzzle_master,live_puzzle_dict,possible_solutions)
               if len(set(live_puzzle_dict[i][0])) == 9 and len(set(live_puzzle_dict[i][1])) == 9 and len(set(live_puzzle_dict[i][-1])):
                   cell_reference(puzzle_master, puzzle_rows, puzzle_columns, puzzle_boxes_final)
                   print temp_puzzle
                   print "the end"
                   break
               i+=1
-    #this solution works! however, it's not efficient. change it so that combos that don't work don't get generated again
 
-# if temp_puzzle not in already_seen:
-#    already_seen.add(temp_puzzle)
-
-
-
-
-
-#for each possible solution for a cell,
-#if it can go in a row, column, and box, that's the correct solution
-
-
-practice_puzzle = "105802000090076405200400819019007306762083090000061050007600030430020501600308900"
-# practice_puzzle = "006857913189643275573291486418329567637485129952176348764532891321968754895714632"
+# practice_puzzle = "105802000090076405200400819019007306762083090000061050007600030430020501600308900"
+practice_puzzle = "006857913189643275573291486418329567637485129952176348764532891321968754895714632"
 puzzle_dict(practice_puzzle)
 row_ref(practice_puzzle)
 column_ref(practice_puzzle)
@@ -368,4 +276,3 @@ cell_reference(puzzle_master, puzzle_rows, puzzle_columns, puzzle_boxes_final)
 solution_collector(live_puzzle_dict)
 solutions_filter(live_puzzle_dict, possible_solutions)
 solver(puzzle_master,live_puzzle_dict,possible_solutions)
-# cell_reference(puzzle_master, puzzle_rows, puzzle_columns, puzzle_boxes_final)
