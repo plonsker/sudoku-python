@@ -228,7 +228,8 @@ def solutions_filter(live_puzzle_dict,possible_solutions):
       if value != 0:
         del possible_solutions[key]
 
-def solver(puzzle_master,live_puzzle_dict,possible_solutions):
+def solver1(puzzle_master,live_puzzle_dict,possible_solutions):
+  global temp_puzzle
   for key,value in puzzle_master.iteritems():
       if puzzle_master[key] == 0:
           for key,value in possible_solutions.iteritems():
@@ -248,11 +249,13 @@ def solver(puzzle_master,live_puzzle_dict,possible_solutions):
 
   temp_puzzle = ''.join(map(str, (puzzle_master.values())))
 
+  print puzzle_master
+
+def solver2(puzzle_master,live_puzzle_dict):
   for key,value in live_puzzle_dict.iteritems():
-      for key,value in live_puzzle_dict.iteritems():
           i = 0
           while i < 81 and len(set(live_puzzle_dict[i][0])) and 9 > len(set(live_puzzle_dict[i][1])) and 9 > len(set(live_puzzle_dict[i][-1])):
-            #   print "hey"
+              print "hey"
               puzzle_dict(temp_puzzle)
               row_ref(temp_puzzle)
               column_ref(temp_puzzle)
@@ -266,8 +269,8 @@ def solver(puzzle_master,live_puzzle_dict,possible_solutions):
                   break
               i+=1
 
-# practice_puzzle = "105802000090076405200400819019007306762083090000061050007600030430020501600308900"
-practice_puzzle = "006857913189643275573291486418329567637485129952176348764532891321968754895714632"
+practice_puzzle = "105802000090076405200400819019007306762083090000061050007600030430020501600308900"
+# practice_puzzle = "006857913189643275573291486418329567637485129952176348764532891321968754895714632"
 puzzle_dict(practice_puzzle)
 row_ref(practice_puzzle)
 column_ref(practice_puzzle)
@@ -275,4 +278,5 @@ box_ref(practice_puzzle)
 cell_reference(puzzle_master, puzzle_rows, puzzle_columns, puzzle_boxes_final)
 solution_collector(live_puzzle_dict)
 solutions_filter(live_puzzle_dict, possible_solutions)
-solver(puzzle_master,live_puzzle_dict,possible_solutions)
+solver1(puzzle_master,live_puzzle_dict,possible_solutions)
+solver2(puzzle_master,live_puzzle_dict)
