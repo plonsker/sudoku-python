@@ -257,10 +257,7 @@ def solver1(puzzle_master,live_puzzle_dict,possible_solutions):
 
   for key,value in puzzle_master.iteritems():
     if isinstance(value, list):
-        print value
         puzzle_master[key] = random.choice(value)
-    else:
-        print "yo"
 
   puzzle_str = ''.join(map(str, (puzzle_master.values())))
   print puzzle_str
