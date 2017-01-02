@@ -4,32 +4,34 @@ from collections import OrderedDict
 import copy
 import random
 
-def start_method(puzzle_str):
-    global puzzle_str_ref
-    puzzle_str_ref = puzzle_str
+# def start_method(puzzle_str):
+#     global puzzle_str_ref
+#     puzzle_str_ref = puzzle_str
 
-def puzzle_dict():
+def puzzle_dict(puzzle_str):
     global puzzle_master
-    puzzle_str_arr = list(puzzle_str_ref)
+    puzzle_str_arr = list(puzzle_str)
     puzzle_master = dict(enumerate(puzzle_str_arr))
-
     puzzle_master = {k:int(v) if v.isdigit() else v for k,v in puzzle_master.items()}
 
-def row_ref():
+
+def row_ref(puzzle_str):
     global puzzle_rows
-    puzzle_str_ref_1 = [ int(x) for x in puzzle_str_ref ]
-    puzzle_rows = [puzzle_str_ref_1[x:x+9] for x in range(0, len(puzzle_str_ref_1),9)]
+    puzzle_str = [ int(x) for x in puzzle_str ]
+    puzzle_rows = [puzzle_str[x:x+9] for x in range(0, len(puzzle_str),9)]
     puzzle_rows = [list(cell) for cell in puzzle_rows]
+    # print puzzle_rows
 
-def column_ref():
+def column_ref(puzzle_str):
     global puzzle_columns
-    puzzle_str_ref_2 = [ int(x) for x in puzzle_str_ref ]
-    puzzle_columns = map(list, zip(*([puzzle_str_ref_2[x:x+9] for x in range(0, len(puzzle_str_ref_2),9)])))
+    puzzle_str = [ int(x) for x in puzzle_str ]
+    puzzle_columns = map(list, zip(*([puzzle_str[x:x+9] for x in range(0, len(puzzle_str),9)])))
+    # print puzzle_columns
 
-def box_ref():
+def box_ref(puzzle_str):
     global puzzle_boxes_final
-    puzzle_str_ref_3 = [ int(x) for x in puzzle_str_ref ]
-    puzzle_box_rows = [puzzle_str_ref_3[x:x+3] for x in range(0, len(puzzle_str_ref_3),3)]
+    puzzle_str = [ int(x) for x in puzzle_str ]
+    puzzle_box_rows = [puzzle_str[x:x+3] for x in range(0, len(puzzle_str),3)]
     puzzle_box_rows = [list(cell) for cell in puzzle_box_rows]
 
     puzzle_boxes = map(list, zip(*([puzzle_box_rows[x:x+3] for x in range(0, len(puzzle_box_rows),3)])))
@@ -81,12 +83,11 @@ def box_ref():
     puzzle_boxes_final.append(box_7)
     puzzle_boxes_final.append(box_8)
 
-def cell_reference(dict1, row, column, box):
+    # print puzzle_boxes_final
+
+
+def cell_reference(puzzle_master, row, column, box):
   global live_puzzle_dict
-  # global dict1
-  # global row
-  # global column
-  # global box
   live_puzzle_dict = {}
 
   for key, value in puzzle_master.iteritems():
@@ -178,11 +179,14 @@ def cell_reference(dict1, row, column, box):
     elif key in range(57,60) or key in range(66,69) or key in range (75,78):
         box = puzzle_boxes_final[7]
         live_puzzle_dict[key].append(puzzle_boxes_final[7])
-    elif key in range(60,63) or key in range(69,71) or key in range (78,81):
+    elif key in range(60,63) or key in range(69,71) or key in range (78,82):
         box = puzzle_boxes_final[8]
         live_puzzle_dict[key].append(puzzle_boxes_final[8])
     else:
         "error. box out of range"
+
+  # print live_puzzle_dict
+
 
 def solution_collector(live_puzzle_dict):
   global possible_solutions
@@ -213,7 +217,7 @@ def solution_collector(live_puzzle_dict):
     for elem in unique_solutions:
       value.append(elem)
 
-  print possible_solutions
+  # print possible_solutions
 
 def solutions_filter(live_puzzle_dict,possible_solutions):
     for key,value in possible_solutions.iteritems():
@@ -227,11 +231,14 @@ def solutions_filter(live_puzzle_dict,possible_solutions):
           del value[:]
           value.append(filtered_list)
 
-    print possible_solutions
+    # print puzzle_master
 
     for key,value in puzzle_master.iteritems():
       if value != 0:
         del possible_solutions[key]
+
+    print puzzle_master
+    print possible_solutions
 
 def solver1(puzzle_master,live_puzzle_dict,possible_solutions):
   global puzzle_str_ref_end
@@ -246,47 +253,49 @@ def solver1(puzzle_master,live_puzzle_dict,possible_solutions):
                   puzzle_master[key] = int(puzzle_master[key])
 
 
-  # print puzzle_master
 
   for key,value in puzzle_master.iteritems():
     if isinstance(value, list):
         puzzle_master[key] = random.choice(value)
 
-  puzzle_str_ref = ''.join(map(str, (puzzle_master.values())))
+  puzzle_str = ''.join(map(str, (puzzle_master.values())))
 
+  row_ref(puzzle_str)
+  column_ref(puzzle_str)
+  box_ref(puzzle_str)
+  cell_reference(puzzle_master, puzzle_rows, puzzle_columns, puzzle_boxes_final)
+  solution_collector(live_puzzle_dict)
+  solutions_filter(live_puzzle_dict, possible_solutions)
+
+  # print puzzle_str_ref
+  # print live_puzzle_dict
+  print "hey"
   # print puzzle_master
-
-def solver2(puzzle_master,live_puzzle_dict):
   # for key,value in live_puzzle_dict.iteritems():
   i = 0
 
-  while 9 > len(set(live_puzzle_dict[i][0])) and 9 > len(set(live_puzzle_dict[i][1])) and 9 > len(set(live_puzzle_dict[i][-1])):
-    #   start_method(puzzle_str_ref)
-    #   puzzle_dict()
-    #   row_ref()
-    #   column_ref()
-    #   box_ref()
-    #   cell_reference(puzzle_master, puzzle_rows, puzzle_columns, puzzle_boxes_final)
-      cell_reference(dict1, row, column, box)
-      solver1(puzzle_master,live_puzzle_dict,possible_solutions)
-    #   print puzzle_str_ref
-      print live_puzzle_dict
-      if len(set(live_puzzle_dict[i][0])) == 9 and len(set(live_puzzle_dict[i][1])) == 9 and len(set(live_puzzle_dict[i][-1])):
-          print puzzle_str_ref
-          print "the end"
-          break
-  i+=1
+  # while 45 > sum(live_puzzle_dict[i][0]) and 45 > sum(live_puzzle_dict[i][1]) and sum(live_puzzle_dict[i][2]):
+  while i < 80 and 9 > len(set(live_puzzle_dict[i][0])) and 9 > len(set(live_puzzle_dict[i][1])) and 9 > len(set(live_puzzle_dict[i][-1])):
+
+      #do something here
+
+    #   print live_puzzle_dict
+    #   if len(set(live_puzzle_dict[i][0])) == 9 and len(set(live_puzzle_dict[i][1])) == 9 and len(set(live_puzzle_dict[i][-1])):
+    #       print puzzle_str_ref
+    #       print "the end"
+    #       break
+    i+=1
   # print puzzle_master
 
 practice_puzzle = "105802000090076405200400819019007306762083090000061050007600030430020501600308900"
 # practice_puzzle = "006857913189643275573291486418329567637485129952176348764532891321968754895714632"
-start_method(practice_puzzle)
-puzzle_dict()
-row_ref()
-column_ref()
-box_ref()
+# start_method(practice_puzzle)
+puzzle_dict(practice_puzzle)
+row_ref(practice_puzzle)
+column_ref(practice_puzzle)
+box_ref(practice_puzzle)
 cell_reference(puzzle_master, puzzle_rows, puzzle_columns, puzzle_boxes_final)
 solution_collector(live_puzzle_dict)
 solutions_filter(live_puzzle_dict, possible_solutions)
 solver1(puzzle_master,live_puzzle_dict,possible_solutions)
-solver2(puzzle_master,live_puzzle_dict)
+# solver2(puzzle_master,live_puzzle_dict)
