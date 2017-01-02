@@ -242,41 +242,39 @@ def solution_collector(live_puzzle_dict):
 
 def solver1(puzzle_master,live_puzzle_dict,possible_solutions):
   global puzzle_str_ref_end
-  for key,value in puzzle_master.iteritems():
-      if puzzle_master[key] == 0:
-          for key,value in possible_solutions.iteritems():
-              insertions = [x for x in possible_solutions[key] if x not in live_puzzle_dict[key]]
-              puzzle_master[key] = [item for sublist in insertions for item in sublist]
-              if len(puzzle_master[key]) == 1:
-                  puzzle_master[key] = map(str, puzzle_master[key])
-                  puzzle_master[key] = ''.join(puzzle_master[key])
-                  puzzle_master[key] = int(puzzle_master[key])
+  i = 0
 
-  print puzzle_master
+  while 9 > len(set(live_puzzle_dict[i][0])) and 9 > len(set(live_puzzle_dict[i][1])) and 9 > len(set(live_puzzle_dict[i][-1])):
+  # while 45 > sum(live_puzzle_dict[i][0]) and 45 > sum(live_puzzle_dict[i][1]) and sum(live_puzzle_dict[i][2]):
 
+      for key,value in puzzle_master.iteritems():
+          if puzzle_master[key] == 0:
+              for key,value in possible_solutions.iteritems():
+                  insertions = [x for x in possible_solutions[key] if x not in live_puzzle_dict[key]]
+                  puzzle_master[key] = [item for sublist in insertions for item in sublist]
+                  if len(puzzle_master[key]) == 1:
+                      puzzle_master[key] = map(str, puzzle_master[key])
+                      puzzle_master[key] = ''.join(puzzle_master[key])
+                      puzzle_master[key] = int(puzzle_master[key])
 
-  for key,value in puzzle_master.iteritems():
-    if isinstance(value, list):
-        puzzle_master[key] = random.choice(value)
-
-  puzzle_str = ''.join(map(str, (puzzle_master.values())))
-  print puzzle_str
-
+    #   print puzzle_master
   # here is the bug. possible solutions are now gone because there isn't a source for them anymore! the dcitionary is empty
-  row_ref(puzzle_str)
-  column_ref(puzzle_str)
-  box_ref(puzzle_str)
-  cell_reference(puzzle_master, puzzle_rows, puzzle_columns, puzzle_boxes_final)
-  solution_collector(live_puzzle_dict)
+      for key,value in puzzle_master.iteritems():
+        if value and isinstance(value, list) and value != []:
+            print value
+            puzzle_master[key] = random.choice(value)
 
-  print puzzle_str
+    #   puzzle_str_ref = ''.join(map(str, (puzzle_master.values())))
 
-  # print puzzle_str_ref
-  # print live_puzzle_dict
-  print "hey"
-  # print puzzle_master
-  # for key,value in live_puzzle_dict.iteritems():
-  # i = 0
+      row_ref(puzzle_str)
+      column_ref(puzzle_str)
+      box_ref(puzzle_str)
+      cell_reference(puzzle_master, puzzle_rows, puzzle_columns, puzzle_boxes_final)
+      solution_collector(live_puzzle_dict)
+
+    #   print puzzle_str
+
+      i+1
 
   # while 45 > sum(live_puzzle_dict[i][0]) and 45 > sum(live_puzzle_dict[i][1]) and sum(live_puzzle_dict[i][2]):
   # while and 9 > len(set(live_puzzle_dict[i][0])) and 9 > len(set(live_puzzle_dict[i][1])) and 9 > len(set(live_puzzle_dict[i][-1])):
