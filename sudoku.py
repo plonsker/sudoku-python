@@ -217,28 +217,28 @@ def solution_collector(live_puzzle_dict):
     for elem in unique_solutions:
       value.append(elem)
 
+  # print "possible solutions"
   # print possible_solutions
-
-def solutions_filter(live_puzzle_dict,possible_solutions):
-    for key,value in possible_solutions.iteritems():
+  for key,value in possible_solutions.iteritems():
       if len(value) == 3:
-        filtered_list = [x for x in value[0] if x in value[1] and x in value[2]]
-        del value[:]
-        value.append(filtered_list)
-
-      if len(value) == 2:
-          filtered_list = [x for x in value[0] if x in value[1]]
+          filtered_list = [x for x in value[0] if x in value[1] and x in value[2]]
           del value[:]
           value.append(filtered_list)
 
-    # print puzzle_master
+  if len(value) == 2:
+      filtered_list = [x for x in value[0] if x in value[1]]
+      del value[:]
+      value.append(filtered_list)
 
-    for key,value in puzzle_master.iteritems():
+  for key,value in puzzle_master.iteritems():
       if value != 0:
-        del possible_solutions[key]
+          del possible_solutions[key]
 
-    print puzzle_master
-    print possible_solutions
+# print puzzle_master
+  print "possible solutions"
+  print possible_solutions
+  print "puzzle_master"
+  print puzzle_master
 
 def solver1(puzzle_master,live_puzzle_dict,possible_solutions):
   global puzzle_str_ref_end
@@ -252,30 +252,37 @@ def solver1(puzzle_master,live_puzzle_dict,possible_solutions):
                   puzzle_master[key] = ''.join(puzzle_master[key])
                   puzzle_master[key] = int(puzzle_master[key])
 
+  print puzzle_master
 
 
   for key,value in puzzle_master.iteritems():
     if isinstance(value, list):
+        print value
         puzzle_master[key] = random.choice(value)
+    else:
+        print "yo"
 
   puzzle_str = ''.join(map(str, (puzzle_master.values())))
+  print puzzle_str
 
+  # here is the bug. possible solutions are now gone because there isn't a source for them anymore! the dcitionary is empty
   row_ref(puzzle_str)
   column_ref(puzzle_str)
   box_ref(puzzle_str)
   cell_reference(puzzle_master, puzzle_rows, puzzle_columns, puzzle_boxes_final)
   solution_collector(live_puzzle_dict)
-  solutions_filter(live_puzzle_dict, possible_solutions)
+
+  print puzzle_str
 
   # print puzzle_str_ref
   # print live_puzzle_dict
   print "hey"
   # print puzzle_master
   # for key,value in live_puzzle_dict.iteritems():
-  i = 0
+  # i = 0
 
   # while 45 > sum(live_puzzle_dict[i][0]) and 45 > sum(live_puzzle_dict[i][1]) and sum(live_puzzle_dict[i][2]):
-  while i < 80 and 9 > len(set(live_puzzle_dict[i][0])) and 9 > len(set(live_puzzle_dict[i][1])) and 9 > len(set(live_puzzle_dict[i][-1])):
+  # while and 9 > len(set(live_puzzle_dict[i][0])) and 9 > len(set(live_puzzle_dict[i][1])) and 9 > len(set(live_puzzle_dict[i][-1])):
 
       #do something here
 
@@ -284,7 +291,7 @@ def solver1(puzzle_master,live_puzzle_dict,possible_solutions):
     #       print puzzle_str_ref
     #       print "the end"
     #       break
-    i+=1
+    # i+=1
   # print puzzle_master
 
 practice_puzzle = "105802000090076405200400819019007306762083090000061050007600030430020501600308900"
@@ -296,6 +303,5 @@ column_ref(practice_puzzle)
 box_ref(practice_puzzle)
 cell_reference(puzzle_master, puzzle_rows, puzzle_columns, puzzle_boxes_final)
 solution_collector(live_puzzle_dict)
-solutions_filter(live_puzzle_dict, possible_solutions)
 solver1(puzzle_master,live_puzzle_dict,possible_solutions)
 # solver2(puzzle_master,live_puzzle_dict)
