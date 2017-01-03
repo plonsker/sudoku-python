@@ -288,13 +288,13 @@ def solver1(puzzle_master,live_puzzle_dict,possible_solutions):
       print "boxes"
       print box_ref(puzzle_str_ref)
 
-      print len(set(row_ref(puzzle_str_ref)[0]))
-      print len(set(column_ref(puzzle_str_ref)[0]))
-      print len(set(box_ref(puzzle_str_ref)[0]))
 
-      if 9 == len(set(row_ref(puzzle_str_ref)[i])) and 9 == len(set(column_ref(puzzle_str_ref)[i])) and 9 == len(set(box_ref(puzzle_str_ref)[i])):
-              print puzzle_str_ref
-              break
+      print map(len, row_ref(puzzle_str_ref))
+
+# map(len, a)
+      if map(len, row_ref(puzzle_str_ref)) == 9 and map(len, column_ref(puzzle_str_ref)) == 9 and map(len, box_ref(puzzle_str_ref)) == 9:
+        print puzzle_str_ref
+        break
       i+=1
 
 
