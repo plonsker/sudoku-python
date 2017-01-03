@@ -19,13 +19,14 @@ def row_ref(puzzle_str):
     puzzle_str = [ int(x) for x in puzzle_str ]
     puzzle_rows = [puzzle_str[x:x+9] for x in range(0, len(puzzle_str),9)]
     puzzle_rows = [list(cell) for cell in puzzle_rows]
+    return puzzle_rows
     # print puzzle_rows
 
 def column_ref(puzzle_str):
     global puzzle_columns
     puzzle_str = [ int(x) for x in puzzle_str ]
     puzzle_columns = map(list, zip(*([puzzle_str[x:x+9] for x in range(0, len(puzzle_str),9)])))
-    # print puzzle_columns
+    return puzzle_columns
 
 def box_ref(puzzle_str):
     global puzzle_boxes_final
@@ -82,7 +83,7 @@ def box_ref(puzzle_str):
     puzzle_boxes_final.append(box_7)
     puzzle_boxes_final.append(box_8)
 
-    # print puzzle_boxes_final
+    return puzzle_boxes_final
 
 
 def cell_reference(puzzle_master, row, column, box):
@@ -242,8 +243,9 @@ def solution_collector(live_puzzle_dict):
 def solver1(puzzle_master,live_puzzle_dict,possible_solutions):
   global puzzle_str_ref_end
   i = 0
+  print live_puzzle_dict
 
-  while 9 > len(set(live_puzzle_dict[i][0])) and 9 > len(set(live_puzzle_dict[i][1])) and 9 > len(set(live_puzzle_dict[i][-1])):
+  while i < 81 and 9 > len(set(live_puzzle_dict[i][0])) and 9 > len(set(live_puzzle_dict[i][1])) and 9 > len(set(live_puzzle_dict[i][-1])):
   # while 45 > sum(live_puzzle_dict[i][0]) and 45 > sum(live_puzzle_dict[i][1]) and sum(live_puzzle_dict[i][2]):
       new_puzzle_master = copy.deepcopy(puzzle_master)
       for key,value in new_puzzle_master.iteritems():
@@ -265,32 +267,36 @@ def solver1(puzzle_master,live_puzzle_dict,possible_solutions):
 
       puzzle_str_ref = ''.join(map(str, (new_puzzle_master.values())))
 
-      row_ref
-      print "sup"
-      column_ref
-      box_ref
-      cell_reference
-      solution_collector
+    #   row_ref
+    #   print "sup"
+    #   column_ref
+    #   box_ref
+    #   cell_reference
+    #   solution_collector
+      #
+    #   puzzle_dict(puzzle_str_ref)
+    #   cell_reference(puzzle_master, row, column, box):
 
-      print puzzle_str_ref
-      i+1
-      if 9 == len(set(live_puzzle_dict[i][0])):
-          break
+    #   print puzzle_str_ref
+      print "yo"
 
 
+      print "rows"
+      print row_ref(puzzle_str_ref)
+      print "columns"
+      print column_ref(puzzle_str_ref)
+      print "boxes"
+      print box_ref(puzzle_str_ref)
 
-  # while 45 > sum(live_puzzle_dict[i][0]) and 45 > sum(live_puzzle_dict[i][1]) and sum(live_puzzle_dict[i][2]):
-  # while and 9 > len(set(live_puzzle_dict[i][0])) and 9 > len(set(live_puzzle_dict[i][1])) and 9 > len(set(live_puzzle_dict[i][-1])):
+      print len(set(row_ref(puzzle_str_ref)[0]))
+      print len(set(column_ref(puzzle_str_ref)[0]))
+      print len(set(box_ref(puzzle_str_ref)[0]))
 
-      #do something here
+      if 9 == len(set(row_ref(puzzle_str_ref)[i])) and 9 == len(set(column_ref(puzzle_str_ref)[i])) and 9 == len(set(box_ref(puzzle_str_ref)[i])):
+              print puzzle_str_ref
+              break
+      i+=1
 
-    #   print live_puzzle_dict
-    #   if len(set(live_puzzle_dict[i][0])) == 9 and len(set(live_puzzle_dict[i][1])) == 9 and len(set(live_puzzle_dict[i][-1])):
-    #       print puzzle_str_ref
-    #       print "the end"
-    #       break
-    # i+=1
-  # print puzzle_master
 
 practice_puzzle = "105802000090076405200400819019007306762083090000061050007600030430020501600308900"
 # practice_puzzle = "006857913189643275573291486418329567637485129952176348764532891321968754895714632"
