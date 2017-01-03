@@ -4,9 +4,8 @@ from collections import OrderedDict
 import copy
 import random
 
-# def start_method(puzzle_str):
-#     global puzzle_str_ref
-#     puzzle_str_ref = puzzle_str
+
+
 
 def puzzle_dict(puzzle_str):
     global puzzle_master
@@ -246,35 +245,39 @@ def solver1(puzzle_master,live_puzzle_dict,possible_solutions):
 
   while 9 > len(set(live_puzzle_dict[i][0])) and 9 > len(set(live_puzzle_dict[i][1])) and 9 > len(set(live_puzzle_dict[i][-1])):
   # while 45 > sum(live_puzzle_dict[i][0]) and 45 > sum(live_puzzle_dict[i][1]) and sum(live_puzzle_dict[i][2]):
-
-      for key,value in puzzle_master.iteritems():
-          if puzzle_master[key] == 0:
+      new_puzzle_master = copy.deepcopy(puzzle_master)
+      for key,value in new_puzzle_master.iteritems():
+          if new_puzzle_master[key] == 0:
               for key,value in possible_solutions.iteritems():
                   insertions = [x for x in possible_solutions[key] if x not in live_puzzle_dict[key]]
-                  puzzle_master[key] = [item for sublist in insertions for item in sublist]
-                  if len(puzzle_master[key]) == 1:
-                      puzzle_master[key] = map(str, puzzle_master[key])
-                      puzzle_master[key] = ''.join(puzzle_master[key])
-                      puzzle_master[key] = int(puzzle_master[key])
+                  new_puzzle_master[key] = [item for sublist in insertions for item in sublist]
+                  if len(new_puzzle_master[key]) == 1:
+                      new_puzzle_master[key] = map(str, new_puzzle_master[key])
+                      new_puzzle_master[key] = ''.join(new_puzzle_master[key])
+                      new_puzzle_master[key] = int(new_puzzle_master[key])
 
     #   print puzzle_master
   # here is the bug. possible solutions are now gone because there isn't a source for them anymore! the dcitionary is empty
-      for key,value in puzzle_master.iteritems():
+      for key,value in new_puzzle_master.iteritems():
         if value and isinstance(value, list) and value != []:
-            print value
-            puzzle_master[key] = random.choice(value)
+            # print value
+            new_puzzle_master[key] = random.choice(value)
 
-    #   puzzle_str_ref = ''.join(map(str, (puzzle_master.values())))
+      puzzle_str_ref = ''.join(map(str, (new_puzzle_master.values())))
 
-      row_ref(puzzle_str)
-      column_ref(puzzle_str)
-      box_ref(puzzle_str)
-      cell_reference(puzzle_master, puzzle_rows, puzzle_columns, puzzle_boxes_final)
-      solution_collector(live_puzzle_dict)
+      row_ref
+      print "sup"
+      column_ref
+      box_ref
+      cell_reference
+      solution_collector
 
-    #   print puzzle_str
-
+      print puzzle_str_ref
       i+1
+      if 9 == len(set(live_puzzle_dict[i][0])):
+          break
+
+
 
   # while 45 > sum(live_puzzle_dict[i][0]) and 45 > sum(live_puzzle_dict[i][1]) and sum(live_puzzle_dict[i][2]):
   # while and 9 > len(set(live_puzzle_dict[i][0])) and 9 > len(set(live_puzzle_dict[i][1])) and 9 > len(set(live_puzzle_dict[i][-1])):
