@@ -185,7 +185,8 @@ def cell_reference(puzzle_master, row, column, box):
     else:
         "error. box out of range"
 
-  # print live_puzzle_dict
+  return live_puzzle_dict
+  print "hey"
 
 
 def solution_collector(live_puzzle_dict):
@@ -266,7 +267,17 @@ def solver1(puzzle_master,live_puzzle_dict,possible_solutions):
             # new_puzzle_master[key] = value[randint(0,len(value)-1)]
             new_puzzle_master[key] = random.choice(value)
 
+
       puzzle_str_ref = ''.join(map(str, (new_puzzle_master.values())))
+
+      new_live_puzzle_dict = cell_reference(new_puzzle_master, row_ref(puzzle_str_ref), column_ref(puzzle_str_ref), box_ref(puzzle_str_ref))
+
+    #   print new_live_puzzle_dict
+
+      for key,value in new_live_puzzle_dict.iteritems():
+          print len(set(value[0]))
+          print len(set(value[1]))
+          print len(set(value[-1]))
 
       if puzzle_str_ref not in already_seen_puzzles:
               already_seen_puzzles.append(puzzle_str_ref)
@@ -279,11 +290,15 @@ def solver1(puzzle_master,live_puzzle_dict,possible_solutions):
               print "%s total calculations" % i
               print "--------------------------"
 
-              if set(map(len, row_set)) == set([9]) and set(map(len, column_set)) == set([9]) and set(map(len, box_set)) == set([9]):
+              #this produces a live dictionary for the puzzle_ref_string!
+              cell_reference(new_puzzle_master, row_ref(puzzle_str_ref), column_ref(puzzle_str_ref), box_ref(puzzle_str_ref))
+
+              if len(set(value[0])) == 9 and len(set(value[1])) == 9 and len(set(value[-1])) == 9:
                       print "======================================="
                       print "Solution:"
                       print puzzle_str_ref
                       print "======================================="
+                    #   print cell_reference(new_puzzle_master, row_ref(puzzle_str_ref), column_ref(puzzle_str_ref), box_ref(puzzle_str_ref))
                       going = False
                       break
               i+=1
@@ -293,13 +308,13 @@ def solver1(puzzle_master,live_puzzle_dict,possible_solutions):
 # practice_puzzle = "105802000090076405200400819019007306762083090000061050007600030430020501600308900"
 
 #nearly solved puzzle:
-practice_puzzle = "246857913180000000000001486418329507637480000950170048764532891321968754895710000"
+# practice_puzzle = "246857913180000000000001486418329507637480000950170048764532891321968754895710000"
 
 #puzzle two:
 # practice_puzzle = "005030081902850060600004050007402830349760005008300490150087002090000600026049503"
 
 #easy kids puzzle
-# practice_puzzle = "639000024002904067070268090005603780701025400360040209510080940200419005043700610"
+practice_puzzle = "639000024002904067070268090005603780701025400360040209510080940200419005043700610"
 
 puzzle_dict(practice_puzzle)
 row_ref(practice_puzzle)
@@ -308,4 +323,3 @@ box_ref(practice_puzzle)
 cell_reference(puzzle_master, puzzle_rows, puzzle_columns, puzzle_boxes_final)
 solution_collector(live_puzzle_dict)
 solver1(puzzle_master,live_puzzle_dict,possible_solutions)
-# solver2(puzzle_master,live_puzzle_dict)
