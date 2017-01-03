@@ -235,18 +235,19 @@ def solution_collector(live_puzzle_dict):
           del possible_solutions[key]
 
 # print puzzle_master
-  print "possible solutions"
-  print possible_solutions
-  print "puzzle_master"
-  print puzzle_master
+  # print "possible solutions"
+  # print possible_solutions
+  # print "puzzle_master"
+  # print puzzle_master
 
 def solver1(puzzle_master,live_puzzle_dict,possible_solutions):
   global puzzle_str_ref_end
   i = 0
-  print live_puzzle_dict
+  # print live_puzzle_dict
+  going = True
 
-  while i < 81 and 9 > len(set(live_puzzle_dict[i][0])) and 9 > len(set(live_puzzle_dict[i][1])) and 9 > len(set(live_puzzle_dict[i][-1])):
-  # while 45 > sum(live_puzzle_dict[i][0]) and 45 > sum(live_puzzle_dict[i][1]) and sum(live_puzzle_dict[i][2]):
+  # while i < 81 and 9 > len(set(live_puzzle_dict[i][0])) and 9 > len(set(live_puzzle_dict[i][1])) and 9 > len(set(live_puzzle_dict[i][-1])):
+  while going:
       new_puzzle_master = copy.deepcopy(puzzle_master)
       for key,value in new_puzzle_master.iteritems():
           if new_puzzle_master[key] == 0:
@@ -267,35 +268,31 @@ def solver1(puzzle_master,live_puzzle_dict,possible_solutions):
 
       puzzle_str_ref = ''.join(map(str, (new_puzzle_master.values())))
 
-    #   row_ref
-    #   print "sup"
-    #   column_ref
-    #   box_ref
-    #   cell_reference
-    #   solution_collector
-      #
-    #   puzzle_dict(puzzle_str_ref)
-    #   cell_reference(puzzle_master, row, column, box):
+      row_set = map(set, row_ref(puzzle_str_ref))
+      print row_set
+      print "hello"
+      print set(map(len, row_set))
+      column_set = map(set, column_ref(puzzle_str_ref))
+      box_set = map(set, column_ref(puzzle_str_ref))
 
-    #   print puzzle_str_ref
-      print "yo"
-
-
-      print "rows"
-      print row_ref(puzzle_str_ref)
-      print "columns"
-      print column_ref(puzzle_str_ref)
-      print "boxes"
-      print box_ref(puzzle_str_ref)
+      print "hey there"
+      print len(set(map(len, row_set)))
+      print len(set(map(len, column_set)))
+      print len(set(map(len, box_set)))
 
 
-      print map(len, row_ref(puzzle_str_ref))
 
-# map(len, a)
-      if map(len, row_ref(puzzle_str_ref)) == 9 and map(len, column_ref(puzzle_str_ref)) == 9 and map(len, box_ref(puzzle_str_ref)) == 9:
-        print puzzle_str_ref
-        break
+
+
+
+      if len(set(map(len, row_set))) == 1 and len(set(map(len, column_set))) == 1 and len(set(map(len, box_set))) == 1:
+              print puzzle_str_ref
+              print "stop"
+              going = False
+              break
       i+=1
+      print "iteration:"
+      print i
 
 
 practice_puzzle = "105802000090076405200400819019007306762083090000061050007600030430020501600308900"
