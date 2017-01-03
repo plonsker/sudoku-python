@@ -281,16 +281,16 @@ def solver1(puzzle_master,live_puzzle_dict,possible_solutions):
               box_set = map(set, column_ref(puzzle_str_ref))
 
               print "hey there"
-              print len(set(map(len, row_set)))
-              print len(set(map(len, column_set)))
-              print len(set(map(len, box_set)))
+              print set(map(len, row_set))
+              print set(map(len, column_set))
+              print set(map(len, box_set))
 
 
 
 
 
 
-              if len(set(map(len, row_set))) == 1 and len(set(map(len, column_set))) == 1 and len(set(map(len, box_set))) == 1:
+              if set(map(len, row_set)) == set([9]) and set(map(len, column_set)) == set([9]) and set(map(len, box_set)) == set([9]):
                       print puzzle_str_ref
                       print "stop"
                       going = False
@@ -300,9 +300,10 @@ def solver1(puzzle_master,live_puzzle_dict,possible_solutions):
               print i
 
 
-practice_puzzle = "105802000090076405200400819019007306762083090000061050007600030430020501600308900"
-# practice_puzzle = "246857913189643275573291486418329567637485129952176348764532891321968754895714632"
+# practice_puzzle = "105802000090076405200400819019007306762083090000061050007600030430020501600308900"
+# practice_puzzle = "246857913189643275573291486418329567637485129952170048764532891321968754895710000"
 # practice_puzzle = "005030081902850060600004050007402830349760005008300490150087002090000600026049503"
+practice_puzzle = "639000024002904067070268090005603780701025400360040209510080940200419005043700610"
 # start_method(practice_puzzle)
 puzzle_dict(practice_puzzle)
 row_ref(practice_puzzle)
