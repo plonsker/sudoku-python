@@ -245,9 +245,8 @@ def solver1(puzzle_master,live_puzzle_dict,possible_solutions):
   i = 0
   # print live_puzzle_dict
   going = True
-  already_seen = []
+  already_seen_puzzles = []
 
-  # while i < 81 and 9 > len(set(live_puzzle_dict[i][0])) and 9 > len(set(live_puzzle_dict[i][1])) and 9 > len(set(live_puzzle_dict[i][-1])):
   while going:
       new_puzzle_master = copy.deepcopy(puzzle_master)
       for key,value in new_puzzle_master.iteritems():
@@ -260,48 +259,41 @@ def solver1(puzzle_master,live_puzzle_dict,possible_solutions):
                       new_puzzle_master[key] = ''.join(new_puzzle_master[key])
                       new_puzzle_master[key] = int(new_puzzle_master[key])
 
-    #   print puzzle_master
-  # here is the bug. possible solutions are now gone because there isn't a source for them anymore! the dcitionary is empty
+      #once this logic is fixed, the solver should run much more efficiently
       for key,value in new_puzzle_master.iteritems():
         if value and isinstance(value, list) and value != []:
             # print value
+            # new_puzzle_master[key] = value[randint(0,len(value)-1)]
             new_puzzle_master[key] = random.choice(value)
 
       puzzle_str_ref = ''.join(map(str, (new_puzzle_master.values())))
 
-      #this is non-snesical. There will only be one puzzle in the list already_seen
-    #   already_seen = []
-      if puzzle_str_ref not in already_seen:
-              already_seen.append(puzzle_str_ref)
-
+      if puzzle_str_ref not in already_seen_puzzles:
+              already_seen_puzzles.append(puzzle_str_ref)
               row_set = map(set, row_ref(puzzle_str_ref))
               column_set = map(set, column_ref(puzzle_str_ref))
               box_set = map(set, column_ref(puzzle_str_ref))
 
               print puzzle_str_ref
-              print "length of already_seen"
-              print len(already_seen)
-
-
-
-
-
+              print "--------------------------"
+              print "%s total calculations" % i
+              print "--------------------------"
 
               if set(map(len, row_set)) == set([9]) and set(map(len, column_set)) == set([9]) and set(map(len, box_set)) == set([9]):
+                      print "======================================="
+                      print "Solution:"
                       print puzzle_str_ref
-                      print "stop"
+                      print "======================================="
                       going = False
                       break
               i+=1
-              print "iteration:"
-              print i
 
 
 #puzzle one:
-practice_puzzle = "105802000090076405200400819019007306762083090000061050007600030430020501600308900"
+# practice_puzzle = "105802000090076405200400819019007306762083090000061050007600030430020501600308900"
 
 #nearly solved puzzle:
-# practice_puzzle = "246857913180000000000001486418329507637480000950170048764532891321968754895710000"
+practice_puzzle = "246857913180000000000001486418329507637480000950170048764532891321968754895710000"
 
 #puzzle two:
 # practice_puzzle = "005030081902850060600004050007402830349760005008300490150087002090000600026049503"
