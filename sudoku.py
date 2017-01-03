@@ -274,10 +274,10 @@ def solver1(puzzle_master,live_puzzle_dict,possible_solutions):
 
     #   print new_live_puzzle_dict
 
-      for key,value in new_live_puzzle_dict.iteritems():
-          print len(set(value[0]))
-          print len(set(value[1]))
-          print len(set(value[-1]))
+    #   for key,value in new_live_puzzle_dict.iteritems():
+    #       print len(set(value[0]))
+    #       print len(set(value[1]))
+    #       print len(set(value[-1]))
 
       if puzzle_str_ref not in already_seen_puzzles:
               already_seen_puzzles.append(puzzle_str_ref)
@@ -290,10 +290,11 @@ def solver1(puzzle_master,live_puzzle_dict,possible_solutions):
               print "%s total calculations" % i
               print "--------------------------"
 
-              #this produces a live dictionary for the puzzle_ref_string!
-              cell_reference(new_puzzle_master, row_ref(puzzle_str_ref), column_ref(puzzle_str_ref), box_ref(puzzle_str_ref))
 
-              if len(set(value[0])) == 9 and len(set(value[1])) == 9 and len(set(value[-1])) == 9:
+
+
+            #   if len(set(new_live_puzzle_dict[key][len(value)-3])) == 9 and len(set(new_live_puzzle_dict[key][len(value)-2])) == 9 and len(set(new_live_puzzle_dict[key][len(value)-1])) == 9:
+              if set(map(len, row_set)) == set([9]) and set(map(len, column_set)) == set([9]) and set(map(len, box_set)) == set([9]):
                       print "======================================="
                       print "Solution:"
                       print puzzle_str_ref
@@ -308,13 +309,16 @@ def solver1(puzzle_master,live_puzzle_dict,possible_solutions):
 # practice_puzzle = "105802000090076405200400819019007306762083090000061050007600030430020501600308900"
 
 #nearly solved puzzle:
-# practice_puzzle = "246857913180000000000001486418329507637480000950170048764532891321968754895710000"
+practice_puzzle = "246857913180000000000001486418329507637480000950170048764532891321968754895710000"
 
 #puzzle two:
 # practice_puzzle = "005030081902850060600004050007402830349760005008300490150087002090000600026049503"
 
 #easy kids puzzle
-practice_puzzle = "639000024002904067070268090005603780701025400360040209510080940200419005043700610"
+# practice_puzzle = "639000024002904067070268090005603780701025400360040209510080940200419005043700610"
+
+# practice_puzzle = "000000000089410000006700193200000700340600010000900005000020050650040020730100000"
+# practice_puzzle = "173269584589413672426758193291584736345672819867931245914826357658347921732195468"
 
 puzzle_dict(practice_puzzle)
 row_ref(practice_puzzle)
