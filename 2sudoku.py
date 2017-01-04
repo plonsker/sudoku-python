@@ -17,11 +17,13 @@ def puzzle_parser(puzzle_str):
 def row_ref(orig_board_list):
     orig_board_rows = [orig_board_list[i:i+9] for i in range(0, len(orig_board_list), 9)]
     print orig_board_rows
+    return orig_board_rows
 
 
 def column_ref(orig_board_list):
     orig_board_columns = map(list, zip(*([orig_board_list[x:x+9] for x in range(0, len(orig_board_list),9)])))
     print orig_board_columns
+    return orig_board_columns
 
 def box_ref(orig_board_list):
     # orig_board_boxes = [ int(x) for x in puzzle_str ]
@@ -45,164 +47,101 @@ def box_ref(orig_board_list):
 
     print "here are the boxes"
     print orig_board_boxes
-    # print map(list, zip(*puzzle_boxes_temp))
+    return orig_board_boxes
 
 #
-# def cell_reference(puzzle_master, row, column, box):
-#   global live_puzzle_dict
-#   live_puzzle_dict = {}
-#
-#   for key, value in puzzle_master.iteritems():
-#     live_puzzle_dict[key] = []
-#
-#     if key in range(0,9):
-#         cell_row = row[0]
-#         live_puzzle_dict[key].append(row[0])
-#     elif key in range(9,18):
-#         cell_row = row[1]
-#         live_puzzle_dict[key].append(row[1])
-#     elif key in range(18,27):
-#         cell_row = row[2]
-#         live_puzzle_dict[key].append(row[2])
-#     elif key in range(27,36):
-#         cell_row = row[3]
-#         live_puzzle_dict[key].append(row[3])
-#     elif key in range(36,45):
-#         cell_row = row[4]
-#         live_puzzle_dict[key].append(row[4])
-#     elif key in range(45,54):
-#         cell_row = row[5]
-#         live_puzzle_dict[key].append(row[5])
-#     elif key in range(54,63):
-#         cell_row = row[6]
-#         live_puzzle_dict[key].append(row[6])
-#     elif key in range(63,72):
-#         cell_row = row[7]
-#         live_puzzle_dict[key].append(row[7])
-#     elif key in range(72,82):
-#         cell_row = row[8]
-#         live_puzzle_dict[key].append(row[8])
-#     else:
-#         print "error. row is out of range"
-#
-#     #columns
-#     if key in range(0,80,9):
-#         cell_column = puzzle_columns[0]
-#         live_puzzle_dict[key].append(column[0])
-#     elif key in range(1,80,9):
-#         cell_column = puzzle_columns[1]
-#         live_puzzle_dict[key].append(column[1])
-#     elif key in range(2,80,9):
-#         cell_column = puzzle_columns[2]
-#         live_puzzle_dict[key].append(column[2])
-#     elif key in range(3,80,9):
-#         cell_column = puzzle_columns[3]
-#         live_puzzle_dict[key].append(column[3])
-#     elif key in range(4,80,9):
-#         cell_column = puzzle_columns[4]
-#         live_puzzle_dict[key].append(column[4])
-#     elif key in range(5,80,9):
-#         cell_column = puzzle_columns[5]
-#         live_puzzle_dict[key].append(column[5])
-#     elif key in range(6,80,9):
-#         cell_column = puzzle_columns[6]
-#         live_puzzle_dict[key].append(column[6])
-#     elif key in range(7,80,9):
-#         cell_column = puzzle_columns[7]
-#         live_puzzle_dict[key].append(column[7])
-#     elif key in range(8,81,9):
-#         cell_column = puzzle_columns[8]
-#         live_puzzle_dict[key].append(column[8])
-#     else:
-#         print "error. column out of range"
-#
-#     #boxes
-#     if key in range(0,3) or key in range(9,12) or key in range (18,21):
-#         box = puzzle_boxes_final[0]
-#         live_puzzle_dict[key].append(puzzle_boxes_final[0])
-#     elif key in range(3,6) or key in range(12,15) or key in range (21,24):
-#         box = puzzle_boxes_final[1]
-#         live_puzzle_dict[key].append(puzzle_boxes_final[1])
-#     elif key in range(6,9) or key in range(15,18) or key in range (24,27):
-#         box = puzzle_boxes_final[2]
-#         live_puzzle_dict[key].append(puzzle_boxes_final[2])
-#     elif key in range(27,30) or key in range(36,39) or key in range (45,48):
-#         box = puzzle_boxes_final[3]
-#         live_puzzle_dict[key].append(puzzle_boxes_final[3])
-#     elif key in range(30,33) or key in range(39,42) or key in range (48,51):
-#         box = puzzle_boxes_final[4]
-#         live_puzzle_dict[key].append(puzzle_boxes_final[4])
-#     elif key in range(33,36) or key in range(42,45) or key in range (51,53):
-#         box = puzzle_boxes_final[5]
-#         live_puzzle_dict[key].append(puzzle_boxes_final[5])
-#     elif key in range(54,57) or key in range(63,66) or key in range (72,75):
-#         box = puzzle_boxes_final[6]
-#         live_puzzle_dict[key].append(puzzle_boxes_final[6])
-#     elif key in range(57,60) or key in range(66,69) or key in range (75,78):
-#         box = puzzle_boxes_final[7]
-#         live_puzzle_dict[key].append(puzzle_boxes_final[7])
-#     elif key in range(60,63) or key in range(69,71) or key in range (78,82):
-#         box = puzzle_boxes_final[8]
-#         live_puzzle_dict[key].append(puzzle_boxes_final[8])
-#     else:
-#         "error. box out of range"
-#
-#   return live_puzzle_dict
-#   print "hey"
-#
-#
-# def solution_collector(live_puzzle_dict):
-#   global possible_solutions
-#   possible_solutions = copy.deepcopy(live_puzzle_dict)
-#   possible_nums = [1,2,3,4,5,6,7,8,9]
-#   possible_solutions_subset = []
-#
-#   for key,value in possible_solutions.iteritems():
-#     for area in value:
-#         for num,item in enumerate(area):
-#           if item != 0:
-#             item = item
-#           else:
-#             if item not in possible_nums:
-#               # this is if num == 0
-#               possible_solutions_subset = filter(lambda x: x not in area, possible_nums)
-#               value.append(possible_solutions_subset)
-#
-#   for key,value in possible_solutions.iteritems():
-#     del value[:3]
-#
-#   for key,value in possible_solutions.iteritems():
-#     unique_solutions = []
-#     for elem in value:
-#       if elem not in unique_solutions:
-#         unique_solutions.append(elem)
-#     del value[:]
-#     for elem in unique_solutions:
-#       value.append(elem)
-#
-#   # print "possible solutions"
-#   # print possible_solutions
-#   for key,value in possible_solutions.iteritems():
-#       if len(value) == 3:
-#           filtered_list = [x for x in value[0] if x in value[1] and x in value[2]]
-#           del value[:]
-#           value.append(filtered_list)
-#
-#   if len(value) == 2:
-#       filtered_list = [x for x in value[0] if x in value[1]]
-#       del value[:]
-#       value.append(filtered_list)
-#
-#   for key,value in puzzle_master.iteritems():
-#       if value != 0:
-#           del possible_solutions[key]
-#
-# # print puzzle_master
-#   # print "possible solutions"
-#   # print possible_solutions
-#   # print "puzzle_master"
-#   # print puzzle_master
-#
+def cell_row(cell):
+    cell / 9
+
+def cell_column(cell):
+    cell % 9
+
+def cell_box(cell):
+    box_row = (cell / 9) / 3
+    box_column = (cell % 9) / 3
+    (box_row + 3) + box_column
+
+def complete_area_checker(area):
+    if set(map(len, area)) == set([9]):
+    #maybe detect if there are any zeros
+        return true
+
+def complete_board_checker(board):
+    for sublist in row_ref(board):
+        if 0 not in sublist:
+            return True
+
+    for sublist in column_ref(board):
+        if 0 not in sublist:
+            return True
+
+    for sublist in box_ref(board):
+        if 0 not in sublist:
+            return True
+
+
+def solution_collector(orig_board_list):
+  global possible_solutions
+  print "here is that original"
+  print orig_board_list
+  possible_solutions = copy.deepcopy(orig_board_list)
+  possible_nums = [1,2,3,4,5,6,7,8,9]
+  possible_solutions_subset = []
+
+  print "who"
+  print possible_solutions
+  print "what"
+
+  for cell, num in enumerate(possible_solutions):
+    if num != 0:
+        print num
+        # cell = cell
+    #this breaks it
+    else:
+        print "yolo"
+        # for possible_entry in possible_nums:
+        #     if possible_entry not in row_ref(board):
+        #       possible_solutions_subset.append(possible_entry)
+        #       num = possible_solutions_subset
+
+  print "here are some possible solutions"
+  print possible_solutions
+  #
+  # for key,value in possible_solutions.iteritems():
+  #   del value[:3]
+  #
+  # for key,value in possible_solutions.iteritems():
+  #   unique_solutions = []
+  #   for elem in value:
+  #     if elem not in unique_solutions:
+  #       unique_solutions.append(elem)
+  #   del value[:]
+  #   for elem in unique_solutions:
+  #     value.append(elem)
+  #
+  # # print "possible solutions"
+  # # print possible_solutions
+  # for key,value in possible_solutions.iteritems():
+  #     if len(value) == 3:
+  #         filtered_list = [x for x in value[0] if x in value[1] and x in value[2]]
+  #         del value[:]
+  #         value.append(filtered_list)
+  #
+  # if len(value) == 2:
+  #     filtered_list = [x for x in value[0] if x in value[1]]
+  #     del value[:]
+  #     value.append(filtered_list)
+  #
+  # for key,value in puzzle_master.iteritems():
+  #     if value != 0:
+  #         del possible_solutions[key]
+
+# print puzzle_master
+  # print "possible solutions"
+  # print possible_solutions
+  # print "puzzle_master"
+  # print puzzle_master
+
 # def solver1(puzzle_master,live_puzzle_dict,possible_solutions):
 #   global puzzle_str_ref_end
 #   i = 0
@@ -288,9 +227,7 @@ puzzle_parser(practice_puzzle)
 row_ref(orig_board_list)
 column_ref(orig_board_list)
 box_ref(orig_board_list)
-# row_ref(practice_puzzle)
-# column_ref(practice_puzzle)
-# box_ref(practice_puzzle)
-# cell_reference(puzzle_master, puzzle_rows, puzzle_columns, puzzle_boxes_final)
-# solution_collector(live_puzzle_dict)
-# solver1(puzzle_master,live_puzzle_dict,possible_solutions)
+cell_row(80)
+cell_column(80)
+cell_box(80)
+solution_collector(orig_board_list)
