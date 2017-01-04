@@ -15,16 +15,80 @@ def puzzle_parser(puzzle_str):
     return orig_board_list
 
 def row_ref(orig_board_list):
-    print [orig_board_list[i:i+9] for i in range(0, len(orig_board_list), 9)]
-    # print puzzle_rows
+    orig_board_rows = [orig_board_list[i:i+9] for i in range(0, len(orig_board_list), 9)]
+    print orig_board_rows
 
-# def column_ref(puzzle_str):
-#     global puzzle_columns
-#     puzzle_str = [ int(x) for x in puzzle_str ]
-#     puzzle_columns = map(list, zip(*([puzzle_str[x:x+9] for x in range(0, len(puzzle_str),9)])))
-#     return puzzle_columns
-#
-# def box_ref(puzzle_str):
+
+def column_ref(orig_board_list):
+    orig_board_columns = map(list, zip(*([orig_board_list[x:x+9] for x in range(0, len(orig_board_list),9)])))
+    print orig_board_columns
+
+def box_ref(orig_board_list):
+    # orig_board_boxes = [ int(x) for x in puzzle_str ]
+    orig_board_boxes = [orig_board_list[x:x+3] for x in range(0, len(orig_board_list),3)]
+    orig_board_boxes = [list(cell) for cell in orig_board_boxes]
+
+    print orig_board_boxes
+
+#make this a loop
+    # i = 0
+    # while i < 24:
+    #     for sublist in orig_board_boxes:
+    #         print len(orig_board_boxes)
+    #         print orig_board_boxes[i] + orig_board_boxes[i+1] + orig_board_boxes[i+2]
+    #     i+=1
+
+    puzzle_boxes_temp = []
+    #
+    puzzle_boxes_temp.append(orig_board_boxes[0] + orig_board_boxes[3] + orig_board_boxes[6])
+    puzzle_boxes_temp.append(orig_board_boxes[1] + orig_board_boxes[4] + orig_board_boxes[7])
+    puzzle_boxes_temp.append(orig_board_boxes[2] + orig_board_boxes[5] + orig_board_boxes[8])
+    puzzle_boxes_temp.append(orig_board_boxes[9] + orig_board_boxes[12] + orig_board_boxes[15])
+    puzzle_boxes_temp.append(orig_board_boxes[10] + orig_board_boxes[13] + orig_board_boxes[16])
+    puzzle_boxes_temp.append(orig_board_boxes[11] + orig_board_boxes[14] + orig_board_boxes[17])
+    puzzle_boxes_temp.append(orig_board_boxes[18] + orig_board_boxes[21] + orig_board_boxes[24])
+    puzzle_boxes_temp.append(orig_board_boxes[19] + orig_board_boxes[22] + orig_board_boxes[25])
+    puzzle_boxes_temp.append(orig_board_boxes[20] + orig_board_boxes[23] + orig_board_boxes[26])
+
+
+
+
+    print "here are the boxes"
+    print puzzle_boxes_temp
+    # print map(list, zip(*puzzle_boxes_temp))
+
+
+
+    # for x in puzzle_boxes_temp:
+    #     flattened_list.append(x)
+    #
+    #     puzzle_boxes_final = []
+    #
+    #     box_0 = flattened_list[0] + flattened_list[1] + flattened_list[2]
+    #     box_1 = flattened_list[3] + flattened_list[4] + flattened_list[5]
+    #     box_2 = flattened_list[6] + flattened_list[7] + flattened_list[8]
+    #     box_3 = flattened_list[9] + flattened_list[10] + flattened_list[11]
+    #     box_4 = flattened_list[12] + flattened_list[13] + flattened_list[14]
+    #     box_5 = flattened_list[15] + flattened_list[16] + flattened_list[17]
+    #     box_6 = flattened_list[18] + flattened_list[19] + flattened_list[20]
+    #     box_7 = flattened_list[21] + flattened_list[22] + flattened_list[23]
+    #     box_8 = flattened_list[24] + flattened_list[25] + flattened_list[26]
+    #
+    #     puzzle_boxes_final.append(box_0)
+    #     puzzle_boxes_final.append(box_1)
+    #     puzzle_boxes_final.append(box_2)
+    #     puzzle_boxes_final.append(box_3)
+    #     puzzle_boxes_final.append(box_4)
+    #     puzzle_boxes_final.append(box_5)
+    #     puzzle_boxes_final.append(box_6)
+    #     puzzle_boxes_final.append(box_7)
+    #     puzzle_boxes_final.append(box_8)
+    #
+    #     return puzzle_boxes_final
+
+    #
+    #     puzzle_boxes = map(list, zip(*([puzzle_box_rows[x:x+3] for x in range(0, len(puzzle_box_rows),3)])))
+
 
 
 #
@@ -330,6 +394,8 @@ puzzle_parser(practice_puzzle)
 # row_ref_index(11)
 # column_ref_index(23)
 row_ref(orig_board_list)
+column_ref(orig_board_list)
+box_ref(orig_board_list)
 # row_ref(practice_puzzle)
 # column_ref(practice_puzzle)
 # box_ref(practice_puzzle)
