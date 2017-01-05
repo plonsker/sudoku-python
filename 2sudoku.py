@@ -109,20 +109,18 @@ def solver(orig_puzzle_list):
     #  print old_orig_puzzle_list
      i = 0
      while going:
-         print "Calculation: %s" % i
+        #  new_orig_puzzle_list = ""
          new_orig_puzzle_list = copy.deepcopy(old_orig_puzzle_list)
-         if new_orig_puzzle_list not in already_seen:
-             already_seen.append(new_orig_puzzle_list)
-             for cell,num in enumerate(new_orig_puzzle_list):
-                 if isinstance(num, list):
-                     new_orig_puzzle_list[cell] = random.choice(num)
-                     print new_orig_puzzle_list
-                     print "Calculation: %s" % i
-             if complete_puzzle_checker(new_orig_puzzle_list):
-                 print "solved"
+         for cell,num in enumerate(new_orig_puzzle_list):
+             if isinstance(num, list):
+                 new_orig_puzzle_list[cell] = random.choice(num)
                  print new_orig_puzzle_list
-                 print already_seen
-                 break
+                 print "Calculation: %s" % i
+         if complete_puzzle_checker(new_orig_puzzle_list):
+             print "solved"
+             print new_orig_puzzle_list
+            #  print already_seen
+             break
 
          i+=1
 
@@ -140,7 +138,7 @@ practice_puzzle = "2468579131800000000000014864183295076374800009501700487645328
 # practice_puzzle = "639000024002904067070268090005603780701025400360040209510080940200419005043700610"
 
 # practice_puzzle = "000000000089410000006700193200000700340600010000900005000020050650040020730100000"
-# practice_puzzle = "173269584589413672426758193291584736345672819867931245914826357658347921732195468"
+# practice_puzzle = "173269584589410072426758193291584700005672819867931245914826357658347921732195468"
 
 puzzle_parser(practice_puzzle)
 # row_ref_index(11)
