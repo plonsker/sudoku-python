@@ -68,16 +68,15 @@ def complete_area_checker(area):
         return True
 
 def complete_puzzle_checker(puzzle):
-
-    if all(len(set(sublist)) == 9 for sublist in row_ref(puzzle)):
+    if all(len(set(sublist)) == 9 for sublist in row_ref(puzzle)) and all(len(set(sublist)) == 9 for sublist in column_ref(puzzle)) and all(len(set(sublist)) == 9 for sublist in box_ref(puzzle)):
             return True
 
-    if all(len(set(sublist)) == 9 for sublist in column_ref(puzzle)):
-            return True
-
-
-    if all(len(set(sublist)) == 9 for sublist in box_ref(puzzle)):
-            return True
+    # if all(len(set(sublist)) == 9 for sublist in column_ref(puzzle)):
+    #         return True
+    #
+    #
+    # if all(len(set(sublist)) == 9 for sublist in box_ref(puzzle)):
+    #         return True
 
 
 def solution_collector(orig_puzzle_list, cell_index):
@@ -110,29 +109,26 @@ def solver(orig_puzzle_list):
      print old_orig_puzzle_list
      i = 0
      while going:
+         print "Calculation: %s" % i
          new_orig_puzzle_list = copy.deepcopy(old_orig_puzzle_list)
          if new_orig_puzzle_list not in already_seen:
              already_seen.append(new_orig_puzzle_list)
              for cell,num in enumerate(new_orig_puzzle_list):
                  if isinstance(num, list):
                      new_orig_puzzle_list[cell] = random.choice(num)
-                     i+=1
-                     print "Calculation: %s" % i
                      print new_orig_puzzle_list
-
+                     print "Calculation: %s" % i
                      if all(isinstance(num, int) for item in new_orig_puzzle_list):
-                         print new_orig_puzzle_list
                          if len(set(new_orig_puzzle_list)) == 9:
                             print "hey"
                             print new_orig_puzzle_list
                             break
                             going = False
-
              if complete_puzzle_checker(new_orig_puzzle_list):
-                 print "Solved"
+                 print "solved"
                  print new_orig_puzzle_list
                  break
-
+         i+=1
 
 
 #puzzle one:
