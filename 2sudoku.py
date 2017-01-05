@@ -106,7 +106,7 @@ def solver(orig_puzzle_list):
      going = True
      already_seen = []
 
-     print old_orig_puzzle_list
+    #  print old_orig_puzzle_list
      i = 0
      while going:
          print "Calculation: %s" % i
@@ -118,16 +118,12 @@ def solver(orig_puzzle_list):
                      new_orig_puzzle_list[cell] = random.choice(num)
                      print new_orig_puzzle_list
                      print "Calculation: %s" % i
-                     if all(isinstance(num, int) for item in new_orig_puzzle_list):
-                         if len(set(new_orig_puzzle_list)) == 9:
-                            print "hey"
-                            print new_orig_puzzle_list
-                            break
-                            going = False
              if complete_puzzle_checker(new_orig_puzzle_list):
                  print "solved"
                  print new_orig_puzzle_list
+                 print already_seen
                  break
+
          i+=1
 
 
@@ -135,13 +131,13 @@ def solver(orig_puzzle_list):
 # practice_puzzle = "105802000090076405200400819019007306762083090000061050007600030430020501600308900"
 
 #nearly solved puzzle:
-# practice_puzzle = "246857913180000000000001486418329507637480000950170048764532891321968754895710000"
+practice_puzzle = "246857913180000000000001486418329507637480000950170048764532891321968754895710000"
 
 #puzzle two:
 # practice_puzzle = "005030081902850060600004050007402830349760005008300490150087002090000600026049503"
 
 #easy kids puzzle
-practice_puzzle = "639000024002904067070268090005603780701025400360040209510080940200419005043700610"
+# practice_puzzle = "639000024002904067070268090005603780701025400360040209510080940200419005043700610"
 
 # practice_puzzle = "000000000089410000006700193200000700340600010000900005000020050650040020730100000"
 # practice_puzzle = "173269584589413672426758193291584736345672819867931245914826357658347921732195468"
