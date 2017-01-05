@@ -82,11 +82,11 @@ def complete_board_checker(board):
 
 
 def solution_collector(orig_board_list, cell_index):
-  print row_ref(orig_board_list)[cell_row(cell_index)]
-  print column_ref(orig_board_list)[cell_column(cell_index)]
-  print box_ref(orig_board_list)[cell_box(cell_index)]
-
-  print row_ref(orig_board_list)[cell_row(cell_index)] + column_ref(orig_board_list)[cell_column(cell_index)] + box_ref(orig_board_list)[cell_box(cell_index)]
+  # print row_ref(orig_board_list)[cell_row(cell_index)]
+  # print column_ref(orig_board_list)[cell_column(cell_index)]
+  # print box_ref(orig_board_list)[cell_box(cell_index)]
+  #
+  # print row_ref(orig_board_list)[cell_row(cell_index)] + column_ref(orig_board_list)[cell_column(cell_index)] + box_ref(orig_board_list)[cell_box(cell_index)]
 
 
   for cell,num in enumerate(orig_board_list):
@@ -95,11 +95,11 @@ def solution_collector(orig_board_list, cell_index):
       if num != 0:
           cell=cell
       else:
-          numbers_now = row_ref(orig_board_list)[cell_row(cell_index)] + column_ref(orig_board_list)[cell_column(cell_index)] + box_ref(orig_board_list)[cell_box(cell_index)]
+          numbers_now = row_ref(orig_board_list)[cell_row(cell)] + column_ref(orig_board_list)[cell_column(cell)] + box_ref(orig_board_list)[cell_box(cell)]
         #   print numbers_now
           num_list = [1,2,3,4,5,6,7,8,9]
           possible_nums = [x for x in num_list if x not in numbers_now]
-          orig_board_list[cell_index] = possible_nums
+          orig_board_list[cell] = possible_nums
         #   print num
   print orig_board_list
 
@@ -141,5 +141,5 @@ box_ref(orig_board_list)
 cell_row(80)
 cell_column(80)
 cell_box(80)
-solution_collector(orig_board_list, 0)
+solution_collector(orig_board_list, 80)
 solver(orig_board_list)
