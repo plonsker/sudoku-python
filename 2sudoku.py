@@ -68,16 +68,15 @@ def complete_area_checker(area):
         return True
 
 def complete_board_checker(board):
-    for sublist in row_ref(board):
-        if 0 not in sublist:
+
+    if all(len(set(sublist)) == 9 for sublist in row_ref(board)):
             return True
 
-    for sublist in column_ref(board):
-        if 0 not in sublist:
+    if all(len(set(sublist)) == 9 for sublist in column_ref(board)):
             return True
 
-    for sublist in box_ref(board):
-        if 0 not in sublist:
+
+    if all(len(set(sublist)) == 9 for sublist in box_ref(board)):
             return True
 
 
@@ -113,15 +112,24 @@ def solver(orig_board_list):
          for cell,num in enumerate(new_orig_board_list):
              if isinstance(num, list):
                  new_orig_board_list[cell] = random.choice(num)
-         print new_orig_board_list
-        #  print "hi"
+                 print new_orig_board_list
+                 print "line 117"
+                 if all(isinstance(num, int) for item in new_orig_board_list):
+                     if len(set(new_orig_board_list)) == 9:
+                        print "hey"
+                        print new_orig_board_list
+                        break
+                        going = False
+                #  if new_orig_board_list
+         if complete_board_checker(new_orig_board_list):
+             break
 
 
 #puzzle one:
-practice_puzzle = "105802000090076405200400819019007306762083090000061050007600030430020501600308900"
+# practice_puzzle = "105802000090076405200400819019007306762083090000061050007600030430020501600308900"
 
 #nearly solved puzzle:
-# practice_puzzle = "246857913180000000000001486418329507637480000950170048764532891321968754895710000"
+practice_puzzle = "246857913180000000000001486418329507637480000950170048764532891321968754895710000"
 
 #puzzle two:
 # practice_puzzle = "005030081902850060600004050007402830349760005008300490150087002090000600026049503"
