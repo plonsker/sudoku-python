@@ -89,7 +89,7 @@ def solution_collector(orig_board_list, cell_index):
   print row_ref(orig_board_list)[cell_row(cell_index)] + column_ref(orig_board_list)[cell_column(cell_index)] + box_ref(orig_board_list)[cell_box(cell_index)]
 
 
-  for cell, num in enumerate(orig_board_list):
+  for cell,num in enumerate(orig_board_list):
     #   print num
     #this is broken. need to fix it so
       if num != 0:
@@ -101,6 +101,20 @@ def solution_collector(orig_board_list, cell_index):
           possible_nums = [x for x in num_list if x not in numbers_now]
           orig_board_list[cell_index] = possible_nums
         #   print num
+  print orig_board_list
+
+def solver(orig_board_list):
+     old_orig_board_list = orig_board_list
+     going = True
+
+     print old_orig_board_list
+     while going:
+         new_orig_board_list = copy.deepcopy(old_orig_board_list)
+         for cell,num in enumerate(new_orig_board_list):
+             if isinstance(num, list):
+                 new_orig_board_list[cell] = random.choice(num)
+         print new_orig_board_list
+        #  print "hi"
 
 
 #puzzle one:
@@ -128,3 +142,4 @@ cell_row(80)
 cell_column(80)
 cell_box(80)
 solution_collector(orig_board_list, 0)
+solver(orig_board_list)
