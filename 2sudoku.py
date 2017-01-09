@@ -8,33 +8,30 @@ import random
 #refactor using a list instead of a dictionary
 
 def puzzle_parser(puzzle_str):
-    # print list(puzzle_str)
     global orig_puzzle_list
     orig_puzzle_list = map(int, list(puzzle_str))
-    # print orig_puzzle_list
     return orig_puzzle_list
 
 def row_ref(orig_puzzle_list):
     orig_puzzle_rows = [orig_puzzle_list[i:i+9] for i in range(0, len(orig_puzzle_list), 9)]
-    # print orig_puzzle_rows
+    print orig_puzzle_rows
     return orig_puzzle_rows
 
 
 def column_ref(orig_puzzle_list):
-    orig_puzzle_columns = map(list, zip(*([orig_puzzle_list[x:x+9] for x in range(0, len(orig_puzzle_list),9)])))
-    # print orig_puzzle_columns
+    orig_puzzle_columns = map(list, zip(*([orig_puzzle_list[i:i+9] for i in range(0, len(orig_puzzle_list),9)])))
+    print orig_puzzle_columns
     return orig_puzzle_columns
 
 def box_ref(orig_puzzle_list):
-    # orig_puzzle_boxes = [ int(x) for x in puzzle_str ]
-    orig_puzzle_boxes_temp = [orig_puzzle_list[x:x+3] for x in range(0, len(orig_puzzle_list),3)]
+    orig_puzzle_boxes_temp = [orig_puzzle_list[i:i+3] for i in range(0, len(orig_puzzle_list),3)]
     orig_puzzle_boxes_temp = [list(cell) for cell in orig_puzzle_boxes_temp]
 
     # print orig_puzzle_boxes_temp
 
     orig_puzzle_boxes = []
 
-    #perhaps make this a while loop
+    #perhaps make this a loop?
     orig_puzzle_boxes.append(orig_puzzle_boxes_temp[0] + orig_puzzle_boxes_temp[3] + orig_puzzle_boxes_temp[6])
     orig_puzzle_boxes.append(orig_puzzle_boxes_temp[1] + orig_puzzle_boxes_temp[4] + orig_puzzle_boxes_temp[7])
     orig_puzzle_boxes.append(orig_puzzle_boxes_temp[2] + orig_puzzle_boxes_temp[5] + orig_puzzle_boxes_temp[8])
@@ -62,6 +59,7 @@ def cell_box(cell):
     box_column = (cell % 9) / 3
     return (box_row * 3) + box_column
 
+#the following method is not in use
 def complete_area_checker(area):
     if len(set(area)) == 1:
     #maybe detect if there are any zeros
@@ -71,21 +69,8 @@ def complete_puzzle_checker(puzzle):
     if all(len(set(sublist)) == 9 for sublist in row_ref(puzzle)) and all(len(set(sublist)) == 9 for sublist in column_ref(puzzle)) and all(len(set(sublist)) == 9 for sublist in box_ref(puzzle)):
             return True
 
-    # if all(len(set(sublist)) == 9 for sublist in column_ref(puzzle)):
-    #         return True
-    #
-    #
-    # if all(len(set(sublist)) == 9 for sublist in box_ref(puzzle)):
-    #         return True
-
 
 def solution_collector(orig_puzzle_list, cell_index):
-  # print row_ref(orig_puzzle_list)[cell_row(cell_index)]
-  # print column_ref(orig_puzzle_list)[cell_column(cell_index)]
-  # print box_ref(orig_puzzle_list)[cell_box(cell_index)]
-  #
-  # print row_ref(orig_puzzle_list)[cell_row(cell_index)] + column_ref(orig_puzzle_list)[cell_column(cell_index)] + box_ref(orig_puzzle_list)[cell_box(cell_index)]
-
 
   for cell,num in enumerate(orig_puzzle_list):
     #   print num
@@ -94,16 +79,15 @@ def solution_collector(orig_puzzle_list, cell_index):
           cell=cell
       else:
           numbers_now = row_ref(orig_puzzle_list)[cell_row(cell)] + column_ref(orig_puzzle_list)[cell_column(cell)] + box_ref(orig_puzzle_list)[cell_box(cell)]
-        #   print numbers_now
-          num_list = [1,2,3,4,5,6,7,8,9]
-          possible_nums = [x for x in num_list if x not in numbers_now]
+          num_list = list(range(1,10))
+          possible_nums = [i for i in num_list if i not in numbers_now]
           orig_puzzle_list[cell] = possible_nums
-        #   print num
   print orig_puzzle_list
 
 def solver(orig_puzzle_list):
      old_orig_puzzle_list = orig_puzzle_list
      going = True
+     #the already_seen list was created in order to keep previous iterations of puzzles from being repeated, but has not done much
      already_seen = []
 
     #  print old_orig_puzzle_list
@@ -125,24 +109,16 @@ def solver(orig_puzzle_list):
          i+=1
 
 
-#puzzle one:
+#first sample puzzle:
 # practice_puzzle = "105802000090076405200400819019007306762083090000061050007600030430020501600308900"
 
-#nearly solved puzzle:
+#nearly solved puzzle for testing purposes:
 practice_puzzle = "246857913180000000000001486418329507637480000950170048764532891321968754895710000"
 
-#puzzle two:
-# practice_puzzle = "005030081902850060600004050007402830349760005008300490150087002090000600026049503"
-
-#easy kids puzzle
-# practice_puzzle = "639000024002904067070268090005603780701025400360040209510080940200419005043700610"
-
-# practice_puzzle = "000000000089410000006700193200000700340600010000900005000020050650040020730100000"
+#entirely solved puzzle for testing sake
 # practice_puzzle = "173269584589410072426758193291584700005672819867931245914826357658347921732195468"
 
 puzzle_parser(practice_puzzle)
-# row_ref_index(11)
-# column_ref_index(23)
 row_ref(orig_puzzle_list)
 column_ref(orig_puzzle_list)
 box_ref(orig_puzzle_list)
